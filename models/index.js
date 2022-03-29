@@ -1,69 +1,25 @@
 // import all models
-const Post = require('./Post');
+const Product = require('./Product');
 const User = require('./User');
-const Vote = require('./Vote');
-const Comment = require('./Comment');
+const Tag = require('./Tag');
+const ProductTag = require('./Product_Tag');
 
-// create associations
-User.hasMany(Post, {
-  foreignKey: 'user_id'
+// User has many Products
+User.hasMany(Product);
+Product.belongsTo(User);
+
+// Tags have many Products
+Product.belongsToMany(Tag, {
+  through: ProductTag,
+  // as: "tagged_products",
+  foreignKey: "product_id",
+});
+// Tags belongToMany Products (through ProductTag)
+Tag.belongsToMany(Product, {
+  through: ProductTag,
+  // as: "tagged_products",
+  foreignKey: "tag_id",
 });
 
-Post.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
 
-User.belongsToMany(Post, {
-  through: Vote,
-  as: 'voted_posts',
-
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Post.belongsToMany(User, {
-  through: Vote,
-  as: 'voted_posts',
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
-});
-
-Vote.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Vote.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
-});
-
-User.hasMany(Vote, {
-  foreignKey: 'user_id'
-});
-
-Post.hasMany(Vote, {
-  foreignKey: 'post_id'
-});
-
-Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Comment.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
-});
-
-User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Post.hasMany(Comment, {
-  foreignKey: 'post_id'
-});
-
-module.exports = { User, Post, Vote, Comment };
+module.exports = { User, Product, Tag };
