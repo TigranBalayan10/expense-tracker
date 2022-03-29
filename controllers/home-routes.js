@@ -1,11 +1,30 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Post, User, Comment, Vote } = require('../models');
+const { User, Product, Tag } = require('../models');
 
-// get all posts for homepage
+// Route to Sign-In Page
 router.get('/', (req, res) => {
-  res.send('Hello World')
+  // If loggedIn, redirect to dashboard
+  res.send('This is the sign in page');
 });
 
+// Route to the Dashboard
+router.get('/dashboard', (req, res) => {
+  res.send('This is the dashboard page');
+});
+
+// Route to trigger modal for adding expense
+router.get('/add-expense', (req, res) => {
+  res.send('This triggers the expense modal');
+});
+
+// Route to trigger modal for adding Tag
+router.get('/add-tag', (req, res) => {
+  res.send('This triggers the tag modal');
+});
+
+router.get('/history', (req, res) => {
+  res.send('this triggers the history page');
+});
 
 module.exports = router;
