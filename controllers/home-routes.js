@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Product, Tag } = require('../models');
 
 
+
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
@@ -12,6 +13,11 @@ router.get('/', (req, res) => {
 // Route to the Dashboard
 router.get('/dashboard', (req, res) => {
   res.sendFile('/Users/anthonybarragan/Desktop/projects/expense-tracker/public/html/piechart.html');
+=======
+// // get all posts for homepage
+router.get('/', (req, res) => {
+    res.send('Hello World')
+
 });
 
 // Route to trigger modal for adding expense
@@ -41,5 +47,6 @@ router.post('/', (req, res) => {
           res.status(500).json(err);
       });
 });
+
 
 module.exports = router;
