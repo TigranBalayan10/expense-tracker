@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "chart.js": "^3.7.1",
     "connect-session-sequelize": "^6.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -22,6 +23,9 @@
     "sequelize": "^5.21.5"
   },
   "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
     "jest": "^25.1.0",
     "nodemon": "^2.0.15"
   }
