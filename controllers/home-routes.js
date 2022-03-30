@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Product, Tag } = require('../models');
 
+
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 
 // Route to the Dashboard
 router.get('/dashboard', (req, res) => {
-  res.send('This is the dashboard page');
+  res.sendFile('/Users/anthonybarragan/Desktop/projects/expense-tracker/public/html/piechart.html');
 });
 
 // Route to trigger modal for adding expense
@@ -25,6 +26,20 @@ router.get('/add-tag', (req, res) => {
 
 router.get('/history', (req, res) => {
   res.send('this triggers the history page');
+});
+
+
+router.post('/', (req, res) => {
+  User.create({
+      username: req.body.username,
+      password: req.body.password,
+      monthly_income: req.body.monthly_income
+  })
+      .then(dbUserData => res.json(dbUserData))
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      });
 });
 
 module.exports = router;
