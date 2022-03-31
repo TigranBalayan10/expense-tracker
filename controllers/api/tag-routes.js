@@ -64,41 +64,43 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     Tag.destroy({
+        where: {
+            id: req.params.id
+        }
+        
+    })
+    .then(dbTagData => {
+    if (!dbTagData) {
+        res.status(404).json({ message: 'No tag found with that ID'});
+        return;
+    }
+    res.json(dbTagData);
+    })
+    .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+    });
+});
 
-// update Tag 
 router.put('/:id', (req, res) => {
     Tag.update(req.body,{
-
+        
         where: {
             id: req.params.id
         }
     })
-
-        .then(dbTagData => {
-            if (!dbTagData) {
-                res.status(404).json({ message: 'No tag found with this id' });
-                return;
-            }
-            res.json(dbTagData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-})
-
+    
     .then(dbTagData => {
         if (!dbTagData) {
-            res.status(404).json({ message: 'No tag found with that ID'});
+            res.status(404).json({ message: 'No tag found with this id' });
             return;
         }
         res.json(dbTagData);
     })
     .catch(err => {
         console.log(err);
-        res.status(500).json(err)
+        res.status(500).json(err);
     });
 });
-
 
 module.exports = router;
