@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 
+// Get all routes
 router.get('/', (req, res) => {
     Tag.findAll({
         include: [
@@ -12,7 +13,6 @@ router.get('/', (req, res) => {
                 }]
             },
     ],
-
     })
         .then(dbTagData => res.json(dbTagData))
         .catch(err => {
@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
         );
 });
 
+// Find one tag
 router.get('/:id', (req, res) => {
     Tag.findOne({
         where: {
@@ -45,8 +46,9 @@ router.get('/:id', (req, res) => {
         });
 });
 
+
+// create a new tag
 router.post('/', (req, res) => {
-    // create a new tag
     Tag.create({
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
@@ -59,12 +61,19 @@ router.post('/', (req, res) => {
         });
 });
 
+
 router.delete('/:id', (req, res) => {
     Tag.destroy({
+
+// update Tag 
+router.put('/:id', (req, res) => {
+    Tag.update(req.body,{
+
         where: {
             id: req.params.id
         }
     })
+
         .then(dbTagData => {
             if (!dbTagData) {
                 res.status(404).json({ message: 'No tag found with this id' });
@@ -77,5 +86,19 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err);
         });
 })
+
+    .then(dbTagData => {
+        if (!dbTagData) {
+            res.status(404).json({ message: 'No tag found with that ID'});
+            return;
+        }
+        res.json(dbTagData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err)
+    });
+});
+
 
 module.exports = router;
