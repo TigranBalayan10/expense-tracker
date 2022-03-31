@@ -16,7 +16,7 @@ router.get('/dashboard', (req, res) => {
 });
 // // get all posts for homepage
 router.get('/', (req, res) => {
-    res.send('Hello World')
+  res.send('Hello World')
 
 });
 
@@ -37,15 +37,25 @@ router.get('/history', (req, res) => {
 
 router.post('/', (req, res) => {
   User.create({
-      username: req.body.username,
-      password: req.body.password,
-      monthly_income: req.body.monthly_income
+    username: req.body.username,
+    password: req.body.password,
+    monthly_income: req.body.monthly_income
   })
-      .then(dbUserData => res.json(dbUserData))
-      .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-      });
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// login page
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
 });
 
 module.exports = router;
