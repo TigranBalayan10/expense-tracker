@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Tag, User, ProductTag } = require('../../models');
+const { Product, Tag, User } = require('../../models');
 // const ProductTag = require('../../models/Product_Tag');
 
 router.get('/', (req, res) => {
@@ -70,5 +70,25 @@ router.post('/', (req, res) => {
 })
 
 // Delete Product
+router.delete('/:id', (req, res) => {
+    Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbProductData => {
+            if (!dbProductData) {
+                res.status(404).json({ message: 'No product found with this id' });
+                return;
+            }
+            res.json(dbProductData);
+        }
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        );
+})
 
 module.exports = router;
