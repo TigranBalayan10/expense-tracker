@@ -21,9 +21,16 @@ Product.init(
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false
         },
-
         user_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
+        },
+        tag_id: {
+            type:DataTypes.INTEGER, 
             allowNull: false,
             references: {
                 model: 'user',
