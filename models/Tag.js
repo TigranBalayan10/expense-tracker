@@ -14,6 +14,10 @@ Tag.init(
         tag_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        tag_color: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {

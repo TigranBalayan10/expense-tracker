@@ -40,10 +40,26 @@ function addLabel (event) {
     const label = document.querySelector('#label').value.trim();
     const amount = document.querySelector('#amount').value.trim();
     const color = document.querySelector('#favcolor').value.trim();
-    labels1.push(label);
-    data1.push(amount);
-    colors1.push(color)
-    chart1.update();
+    // labels1.push(label);
+    // data1.push(amount);
+    // colors1.push(color)
+    // chart1.update();
+
+    // send this new expsen to server/db
+    fetch('/api/expenses', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ label, amount, color })
+    })
+    .then(res => res.json())
+    .then(data => {
+        // data is an object, that includes all of the new state for chart
+        Chart.update();
+    })
+    .catch(err => console.log(err));
+
 }
 document.querySelector('#add-label').addEventListener('submit', addLabel);
 

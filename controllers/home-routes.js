@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 // Route to the Dashboard
 router.get('/dashboard', (req, res) => {
   res.sendFile('/Users/anthonybarragan/Desktop/projects/expense-tracker/public/html/piechart.html');
-=======
+});
 // // get all posts for homepage
 router.get('/', (req, res) => {
     res.send('Hello World')
@@ -47,6 +47,5 @@ router.post('/', (req, res) => {
           res.status(500).json(err);
       });
 });
-
 
 module.exports = router;
