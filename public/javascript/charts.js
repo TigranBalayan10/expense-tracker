@@ -1,5 +1,5 @@
 
-Chart.defaults.font.size =24;
+Chart.defaults.font.size = 18;
 let labels1 = [
     'Fitness',
     'Groceries',
