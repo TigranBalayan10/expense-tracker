@@ -1,18 +1,23 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Product, Tag } = require('../models');
+const path = require('path');
 
 
 
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
-  res.send('This is the sign in page');
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
+  } else {
+    res.render('login');
+  }
 });
 
 // Route to the Dashboard
 router.get('/dashboard', (req, res) => {
-  res.sendFile('/Users/anthonybarragan/Desktop/projects/expense-tracker/public/html/piechart.html');
+  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
 });
 // // get all posts for homepage
 router.get('/', (req, res) => {
