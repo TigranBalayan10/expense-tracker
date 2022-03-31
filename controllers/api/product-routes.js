@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { Product, Tag, User, ProductTag } = require('../../models');
-const { route } = require('./tag-routes');
+
+const { Product, Tag, User } = require('../../models');
+
 // const ProductTag = require('../../models/Product_Tag');
 
 // Get all products, tags, and users
@@ -99,6 +100,22 @@ router.delete('/:id', (req, res) => {
             id: req.params.id
         }
     })
+
+        .then(dbProductData => {
+            if (!dbProductData) {
+                res.status(404).json({ message: 'No product found with this id' });
+                return;
+            }
+            res.json(dbProductData);
+        }
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        );
+})
+
     .then(dbProductData => {
         if(!dbProductData) {
             res.status(404).json({ message: 'No user found with that id'})
@@ -111,5 +128,6 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
+
 
 module.exports = router;

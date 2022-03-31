@@ -61,13 +61,32 @@ router.post('/', (req, res) => {
         });
 });
 
+
+router.delete('/:id', (req, res) => {
+    Tag.destroy({
+
 // update Tag 
 router.put('/:id', (req, res) => {
     Tag.update(req.body,{
+
         where: {
             id: req.params.id
         }
     })
+
+        .then(dbTagData => {
+            if (!dbTagData) {
+                res.status(404).json({ message: 'No tag found with this id' });
+                return;
+            }
+            res.json(dbTagData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
+
     .then(dbTagData => {
         if (!dbTagData) {
             res.status(404).json({ message: 'No tag found with that ID'});
@@ -80,5 +99,6 @@ router.put('/:id', (req, res) => {
         res.status(500).json(err)
     });
 });
+
 
 module.exports = router;
