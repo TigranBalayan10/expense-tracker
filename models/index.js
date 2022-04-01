@@ -11,4 +11,7 @@ Product.belongsTo(User);
 Tag.hasMany(Product);
 Product.belongsTo(Tag);
 
+User.hasMany(Tag);
+Tag.belongsTo(User)
+
 module.exports = { User, Product, Tag };

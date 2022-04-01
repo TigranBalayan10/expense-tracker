@@ -4,25 +4,79 @@ const { Tag } = require('../models');
 const tagData = [
 {
     "tag_name": "Groceries",
-    "tag_color": "red"
+    "tag_color": "red",
+    "user_id": 1
 },
 {
     "tag_name": "Wardrobe",
-    "tag_color": "blue"
+    "tag_color": "blue",  
+    "user_id": 1
 },
 {
     "tag_name": "Mortgage/rent",
-    "tag_color": "pink"
+    "tag_color": "pink",
+    "user_id": 1
 },
 {
     "tag_name": "Dining",
-    "tag_color": "yellow"
+    "tag_color": "yellow",
+    "user_id": 1
 },
 {
     "tag_name": "Drinks",
-    "tag_color": "green"
+    "tag_color": "green",
+    "user_id": 1
 },
-
+{
+    "tag_name": "Groceries",
+    "tag_color": "red",
+    "user_id": 2
+},
+{
+    "tag_name": "Wardrobe",
+    "tag_color": "blue",  
+    "user_id": 2
+},
+{
+    "tag_name": "Mortgage/rent",
+    "tag_color": "pink",
+    "user_id": 2
+},
+{
+    "tag_name": "Dining",
+    "tag_color": "yellow",
+    "user_id": 2
+},
+{
+    "tag_name": "Drinks",
+    "tag_color": "green",
+    "user_id": 2
+},
+{
+    "tag_name": "Groceries",
+    "tag_color": "red",
+    "user_id": 3
+},
+{
+    "tag_name": "Wardrobe",
+    "tag_color": "blue",  
+    "user_id": 3
+},
+{
+    "tag_name": "Mortgage/rent",
+    "tag_color": "pink",
+    "user_id": 3
+},
+{
+    "tag_name": "Dining",
+    "tag_color": "yellow",
+    "user_id": 3
+},
+{
+    "tag_name": "Drinks",
+    "tag_color": "green",
+    "user_id": 3
+},
 ];
 
 const tagUsers = () => Tag.bulkCreate(tagData);

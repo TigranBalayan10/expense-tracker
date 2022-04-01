@@ -23,30 +23,7 @@ router.get('/', (req, res) => {
         );
 });
 
-// Find one tag
-router.get('/:id', (req, res) => {
-    Tag.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [{
-            model: Product,
-            attributes: ['id', 'product_name', 'price'],
-        }]
-    })
-        .then(dbTagData => {
-            if (!dbTagData) {
-                res.status(404).json({ message: 'No tag found with this id' });
-                return;
-            }
-            res.json(dbTagData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-// Trying to get all tags and their price total
+// Trying to get one tags and their price total
 router.get('/total/:tag_id/:user_id', (req, res) => {
     Tag.findOne({
         where: {
@@ -76,6 +53,8 @@ router.post('/', (req, res) => {
     Tag.create({
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
+        // Get from session
+        // user_id: req.session.user_id
 
     })
         .then(dbTagData => res.json(dbTagData))
