@@ -50,10 +50,11 @@ function addExpense (event) {
         },
         body: JSON.stringify({ 
             product_name,
+            // This will be dynamic with the handlebars. 
             tag_id,
             price,
             // we'll get this from the sessions
-            user_id: 1
+            user_id: 2
         })
     })
     .then(res => res.json())
@@ -66,34 +67,29 @@ function addExpense (event) {
 
 // Reloads page with current data from the Database.
 function reloadPage () {
+    // User needs to be dynamic
     fetch('/api/users/2', {
         method: 'GET'
     })
     .then(tagInfo => tagInfo.json())
     .then(async data => {
-        console.log(data)
         data1.length = 0;
         labels1.length = 0;
         colors1.length = 0;
-        let allProducts= data.products
-        console.log(data.products)
-        for(let i = 0; i < allProducts.length; i++) {
-            let tagId = allProducts[i].tag.id;
-            let userId = data.id;
-            let tagColor = allProducts[i].tag.tag_color;
-            let tagName = allProducts[i].tag.tag_name;
-            // This is populating the arrays with every Product instead of every Tag
-            const totalCall = await fetch(`/api/products/total/${tagId}/${userId}`, {
+        let userId = data.id;
+        let allTags= data.tags
+        for(let i = 0; i < allTags.length; i++) {
+            let tagId = await allTags[i].id;
+            let tagColor = await allTags[i].tag_color;
+            let tagName = await allTags[i].tag_name;
+            const totalCall = await fetch(`/api/tags/total/${tagId}/${userId}`, {
                 method: 'GET', 
                 headers: { 'Content-Type': 'application/json' }
             });
             const totalExpense = await totalCall.json();
-            console.log(await totalExpense)
-            data1.push( await totalExpense[0].total_price)
+            data1.push( await totalExpense['products.total_price'])
             labels1.push( await tagName);
             colors1.push( await tagColor);
-            console.log('total expense ' + totalExpense)
-            console.log(data1);
         }
     })
     .then(data => {

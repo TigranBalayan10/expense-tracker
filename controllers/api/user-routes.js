@@ -26,10 +26,10 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Product,
-                include: [{
-                    model: Tag
-                }]
             },
+            {
+                model: Tag
+            }
     ],
     })
     .then(dbUserData => {
