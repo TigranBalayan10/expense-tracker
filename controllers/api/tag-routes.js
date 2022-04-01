@@ -45,6 +45,26 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
+// router.get('/total/:user_id', (req, res) => {
+//     Tag.findAll({
+//         where: {
+//             _id: req.params.user_id
+//         },
+//         include: [
+//             {
+//                 model: Product,
+//                 attributes: [
+//                     [sequelize.fn('sum', sequelize.col('price')), 'total_price']
+//                 ]
+//             }
+//         ]
+//     })
+//     .then(dbProductData => {
+//         console.log(dbProductData);
+//         res.json(dbProductData);
+//     })
+//     .catch(err => res.json(err))
+// })
 
 // Create a new tag
 router.post('/', (req, res) => {

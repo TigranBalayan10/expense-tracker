@@ -48,7 +48,7 @@ const productData = [
     "product_name": "",
     "price": 2231.32,
     "tag_id":3,
-    "user_id":1
+    "user_id":2
 },
 {
     "product_name": "",
@@ -88,7 +88,7 @@ const productData = [
 },
 {
     "product_name": "Whiskey Tour",
-    "price": 8831.32,
+    "price": 1831.32,
     "tag_id":5,
     "user_id":3
 },

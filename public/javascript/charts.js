@@ -1,8 +1,6 @@
-
-
 Chart.defaults.font.size =18;
+// This data comes from the database. 
 let labels1 = [];
-// This data needs to come from the database. 
 let data1 = [];
 let colors1 = [];
 let myChart1 = document.getElementById('myPieChart').getContext('2d');
@@ -32,13 +30,12 @@ async function updateLabel (event) {
         headers: {'Content-Type': 'application/json'}
     })
     if(response.ok) {
-        alert('sent to database')
+        console.log('sent to database')
     }
-
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
-// Add label with value
+// Add an expense to a pre-existing tag and reload the page to show changes. 
 function addExpense (event) {
     event.preventDefault();
     const tag_id = document.querySelector('#tag').value;
@@ -62,12 +59,12 @@ function addExpense (event) {
     .then(res => res.json())
     .then(data => {
         console.log(data)
-        reloadPage();
-        // I need array of all Tags, total_amount, colors
-        // Chart.update();
+        reloadPage(); 
     })
     .catch(err => console.log(err));
 }
+
+// Reloads page with current data from the Database.
 function reloadPage () {
     fetch('/api/users/2', {
         method: 'GET'
@@ -79,19 +76,24 @@ function reloadPage () {
         labels1.length = 0;
         colors1.length = 0;
         let allProducts= data.products
+        console.log(data.products)
         for(let i = 0; i < allProducts.length; i++) {
             let tagId = allProducts[i].tag.id;
+            let userId = data.id;
             let tagColor = allProducts[i].tag.tag_color;
             let tagName = allProducts[i].tag.tag_name;
-            // push all labels into labels array
-            const totalCall = await fetch(`/api/products/total/${tagId}`, {
+            // This is populating the arrays with every Product instead of every Tag
+            const totalCall = await fetch(`/api/products/total/${tagId}/${userId}`, {
                 method: 'GET', 
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
             const totalExpense = await totalCall.json();
+            console.log(await totalExpense)
             data1.push( await totalExpense[0].total_price)
             labels1.push( await tagName);
             colors1.push( await tagColor);
+            console.log('total expense ' + totalExpense)
+            console.log(data1);
         }
     })
     .then(data => {
@@ -99,8 +101,6 @@ function reloadPage () {
     })
 }
 reloadPage();
-
-
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
 
 // //////////////////////BAR GRAPH///////////////////////////////
