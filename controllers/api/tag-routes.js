@@ -46,8 +46,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-
-// create a new tag
+// Create a new tag
 router.post('/', (req, res) => {
     Tag.create({
         tag_name: req.body.tag_name,
@@ -61,7 +60,7 @@ router.post('/', (req, res) => {
         });
 });
 
-
+// Delete Tag
 router.delete('/:id', (req, res) => {
     Tag.destroy({
         where: {
@@ -82,6 +81,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// Update tag
 router.put('/:id', (req, res) => {
     Tag.update(req.body,{
         
