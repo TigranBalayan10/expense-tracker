@@ -66,7 +66,7 @@ function addExpense (event) {
 
 // Reloads page with current data from the Database.
 function reloadPage () {
-    fetch('/api/users/2', {
+    fetch('/api/users/1', {
         method: 'GET'
     })
     .then(tagInfo => tagInfo.json())
@@ -83,16 +83,15 @@ function reloadPage () {
             let tagColor = allProducts[i].tag.tag_color;
             let tagName = allProducts[i].tag.tag_name;
             // This is populating the arrays with every Product instead of every Tag
-            const totalCall = await fetch(`/api/products/total/${tagId}/${userId}`, {
+            const totalCall = await fetch(`/api/tags/total/${tagId}/${userId}`, {
                 method: 'GET', 
                 headers: { 'Content-Type': 'application/json' }
             });
             const totalExpense = await totalCall.json();
-            console.log(await totalExpense)
-            data1.push( await totalExpense[0].total_price)
+            console.log(await totalExpense['products.total_price'])
+            data1.push( await totalExpense['products.total_price'])
             labels1.push( await tagName);
             colors1.push( await tagColor);
-            console.log('total expense ' + totalExpense)
             console.log(data1);
         }
     })

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
+const sequelize = require('sequelize');
 
 // Get all routes
 router.get('/', (req, res) => {
@@ -45,26 +46,30 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-// router.get('/total/:user_id', (req, res) => {
-//     Tag.findAll({
-//         where: {
-//             _id: req.params.user_id
-//         },
-//         include: [
-//             {
-//                 model: Product,
-//                 attributes: [
-//                     [sequelize.fn('sum', sequelize.col('price')), 'total_price']
-//                 ]
-//             }
-//         ]
-//     })
-//     .then(dbProductData => {
-//         console.log(dbProductData);
-//         res.json(dbProductData);
-//     })
-//     .catch(err => res.json(err))
-// })
+// Trying to get all tags and their price total
+router.get('/total/:tag_id/:user_id', (req, res) => {
+    Tag.findOne({
+        where: {
+            id: req.params.tag_id
+        },
+        raw: true,
+        include: [
+            {
+                model: Product,
+                where: {
+                    user_id: req.params.user_id
+                },
+                attributes: [
+                    [sequelize.fn('SUM', sequelize.col('price')), 'total_price']]
+                },
+            ]
+        })
+    .then(dbProductData => {
+        console.log(dbProductData);
+        res.json(dbProductData);
+    })
+    .catch(err => res.json(err))
+})
 
 // Create a new tag
 router.post('/', (req, res) => {
