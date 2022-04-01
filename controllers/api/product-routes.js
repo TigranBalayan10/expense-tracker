@@ -3,8 +3,6 @@ const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 const { sequelize } = require('../../models/Product');
 
-// const ProductTag = require('../../models/Product_Tag');
-
 // Get all products, tags, and users
 router.get('/', (req, res) => {
     Product.findAll({
