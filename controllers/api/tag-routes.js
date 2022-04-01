@@ -45,9 +45,28 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
+// router.get('/total/:user_id', (req, res) => {
+//     Tag.findAll({
+//         where: {
+//             _id: req.params.user_id
+//         },
+//         include: [
+//             {
+//                 model: Product,
+//                 attributes: [
+//                     [sequelize.fn('sum', sequelize.col('price')), 'total_price']
+//                 ]
+//             }
+//         ]
+//     })
+//     .then(dbProductData => {
+//         console.log(dbProductData);
+//         res.json(dbProductData);
+//     })
+//     .catch(err => res.json(err))
+// })
 
-
-// create a new tag
+// Create a new tag
 router.post('/', (req, res) => {
     Tag.create({
         tag_name: req.body.tag_name,
@@ -61,7 +80,7 @@ router.post('/', (req, res) => {
         });
 });
 
-
+// Delete Tag
 router.delete('/:id', (req, res) => {
     Tag.destroy({
         where: {
@@ -82,6 +101,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// Update tag
 router.put('/:id', (req, res) => {
     Tag.update(req.body,{
         

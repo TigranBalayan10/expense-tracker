@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const { Product, Tag, User } = require('../../models');
+const { sequelize } = require('../../models/Product');
 
 // Get all products, tags, and users
 router.get('/', (req, res) => {
@@ -25,6 +26,24 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         }
         );
+})
+
+// Find total $ in products in a given Tag
+router.get('/total/:tag_id/:user_id', (req, res) => {
+    Product.findAll({
+        where: {
+            tag_id: req.params.tag_id,
+            user_id: req.params.user_id
+        },
+        attributes: [
+            [sequelize.fn('sum', sequelize.col('price')), 'total_price']
+        ]
+    })
+    .then(dbProductData => {
+        console.log(dbProductData);
+        res.json(dbProductData);
+    })
+    .catch(err => res.json(err))
 })
 
 // Find one product 
