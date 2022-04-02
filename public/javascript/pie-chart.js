@@ -1,18 +1,34 @@
-Chart.defaults.font.size =18;
+Chart.defaults.font.size =15;
+Chart.defaults.color = '#000'
+Chart.defaults.scale.ticks.beginAtZero = true
 // This data comes from the database. 
 let labels1 = [];
 let data1 = [];
 let colors1 = [];
 let myChart1 = document.getElementById('myPieChart').getContext('2d');
+// Pie Chart Configs
 let chart1 = new Chart(myChart1, {
     type: 'pie',
     data: {
         labels: labels1,
         datasets: [{
             data: data1,
-            backgroundColor: colors1
+            backgroundColor: colors1,
+            borderWidth: 1,
+            hoverBorderWidth: 2,
+            hoverBorderColor: '#000',
+            borderColor: '#3d3d3d'
         }]
     },
+    options: {
+        animation: {
+            animateScale: true
+        },
+        title: {
+            display: true,
+
+        }
+    }
 });
 
 // Update values of labels
@@ -33,7 +49,7 @@ async function updateLabel (event) {
         console.log('sent to database')
     }
 }
-document.querySelector('#add-tag').addEventListener('submit', updateLabel);
+// document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
 // Add an expense to a pre-existing tag and reload the page to show changes. 
 function addExpense (event) {
@@ -99,5 +115,5 @@ function reloadPage () {
     })
 }
 
-document.querySelector('#add-expense').addEventListener('submit', addExpense);
+// document.querySelector('#add-expense').addEventListener('submit', addExpense);
 reloadPage();
