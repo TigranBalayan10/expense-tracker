@@ -21,7 +21,10 @@
                             <option disabled selected> </option>
                             <option value="1">Groceries</option>
                             <option value="2">Mortage/rent</option>
-                            <option value="6">Electricity</option>
+                            <option value="3">Games</option>
+                            <option value="4">clothes</option>
+                            <option value="5">electricity</option>
+                            
                         </select>
                     </div>
                     <div class="mt-4">
@@ -47,13 +50,25 @@
                 </form>
             </div>
             <div class="col mt-5">
+                <div class="container">
+                    <h2><span id="countdown" class="text-danger"></span> until the first.</h2>
+                    <label for="file">Countdown</label>
+                    <progress id="countdown-progress" max="100"></progress>
+                </div>
                 <canvas id="myPieChart"></canvas>
-                <!-- <canvas id="myBarChart"></canvas> -->
+                <canvas id="myBarChart"></canvas>
             </div>
         </div>
     </div>
     <!-- Charts js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../javascript/charts.js"></script>
+<<<<<<< HEAD
+    <!-- <script src="../javascript/pie-chart.js"></script> -->
+    <script src="/javascript/bar-chart.js"></script>
+    <script src="/javascript/money-time.js"></script>
+=======
+    <script src="../javascript/pie-chart.js"></script>
+    <script src="../javascript/bar-chart.js"></script>
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 </body>
 </html>

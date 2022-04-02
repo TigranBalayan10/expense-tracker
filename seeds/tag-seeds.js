@@ -4,27 +4,27 @@ const { Tag } = require('../models');
 const tagData = [
 {
     "tag_name": "Groceries",
-    "tag_color": "red",
+    "tag_color": "rgba(255, 99, 132, 0.2)",
     "user_id": 1
 },
 {
     "tag_name": "Wardrobe",
-    "tag_color": "blue",  
+    "tag_color": "rgba(255, 159, 64, 0.2)",  
     "user_id": 1
 },
 {
     "tag_name": "Mortgage/rent",
-    "tag_color": "pink",
+    "tag_color": "rgba(255, 205, 86, 0.2)",
     "user_id": 1
 },
 {
     "tag_name": "Dining",
-    "tag_color": "yellow",
+    "tag_color": "rgba(75, 192, 192, 0.2)",
     "user_id": 1
 },
 {
     "tag_name": "Drinks",
-    "tag_color": "green",
+    "tag_color": "rgba(54, 162, 235, 0.2)",
     "user_id": 1
 },
 {

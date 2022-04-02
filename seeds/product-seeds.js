@@ -153,8 +153,6 @@ const productData = [
     "tag_id":10,
     "user_id":2
 },
-
-
 ];
 
 const makeProducts = () => Product.bulkCreate(productData);
