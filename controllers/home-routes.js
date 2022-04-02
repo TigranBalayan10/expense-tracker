@@ -65,7 +65,7 @@ router.get('/dashboard', (req, res) => {
     return;
   }
 
-  res.render('dashboard');
+  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 });
 
 module.exports = router;
