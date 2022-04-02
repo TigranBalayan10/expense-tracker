@@ -11,14 +11,19 @@ router.get('/', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/dashboard');
   } else {
-    res.render('login');
+    res.render('homepage');
   }
 });
 
-// Route to the Dashboard
-router.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+// Route to registration page
+router.get('/signup', (req, res) => {
+    res.render('signup');
 });
+
+// Route to the Dashboard
+// router.get('/dashboard', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+// });
 // // get all posts for homepage
 router.get('/', (req, res) => {
   res.send('Hello World')
@@ -54,13 +59,13 @@ router.post('/', (req, res) => {
 });
 
 // login page
-router.get('/login', (req, res) => {
+router.get('/dashboard', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect('/dashboard');
     return;
   }
 
-  res.render('login');
+  res.render('dashboard');
 });
 
 module.exports = router;
