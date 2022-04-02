@@ -1,7 +1,42 @@
-<ol class="post-list">
-  {{#each posts as |post|}}
-  <li>
-    {{> post-info post }}
-  </li>
-  {{/each}}
-</ol>
+<header>
+  <nav class="nav-bar">
+    <div class="container">
+      <div class="text-center justify-content-center">
+        <h1 class="fs-1 text-success">EXPENSE TRACKER</h1>
+        <h6 class="fs-4 text-success">Take the suspense out of expenses</h6>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-md-center m-5">
+      <div class="col-md-auto">
+        <div class="card" style="width: 25rem" id="card-op">
+          <div class="card-body d-grid gap-4">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+              <label for="floatingInput">Login</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+              <label for="floatingPassword">Password</label>
+            </div>
+            <button type="button" class="btn btn-outline-success" id="login">
+              Login
+            </button>
+            <button type="submit" class="btn btn-success" id="sign-up">
+              <a href="signup" class="sign-up-a text-light">Sign Up</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="/javascript/login.js"></script>
+</body>
