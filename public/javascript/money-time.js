@@ -27,7 +27,7 @@ function daysTilFirst () {
 
 daysTilFirst();
 // Run every five miniutes
-setInterval(daysTilFirst, (1000));
+// setInterval(daysTilFirst, (1000));
 
 // Reset money on the first
 async function payDayCountdown () {
