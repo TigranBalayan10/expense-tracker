@@ -1,18 +1,26 @@
+<<<<<<< HEAD
 Chart.defaults.font.size =15;
 Chart.defaults.color = '#000'
 Chart.defaults.scale.ticks.beginAtZero = true
+=======
+Chart.defaults.font.size =18;
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 // This data comes from the database. 
 let labels1 = [];
 let data1 = [];
 let colors1 = [];
 let myChart1 = document.getElementById('myPieChart').getContext('2d');
+<<<<<<< HEAD
 // Pie Chart Configs
+=======
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 let chart1 = new Chart(myChart1, {
     type: 'pie',
     data: {
         labels: labels1,
         datasets: [{
             data: data1,
+<<<<<<< HEAD
             backgroundColor: colors1,
             borderWidth: 1,
             hoverBorderWidth: 2,
@@ -29,6 +37,11 @@ let chart1 = new Chart(myChart1, {
 
         }
     }
+=======
+            backgroundColor: colors1
+        }]
+    },
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 });
 
 // Update values of labels
@@ -49,7 +62,11 @@ async function updateLabel (event) {
         console.log('sent to database')
     }
 }
+<<<<<<< HEAD
 // document.querySelector('#add-tag').addEventListener('submit', updateLabel);
+=======
+document.querySelector('#add-tag').addEventListener('submit', updateLabel);
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 
 // Add an expense to a pre-existing tag and reload the page to show changes. 
 function addExpense (event) {
@@ -115,5 +132,9 @@ function reloadPage () {
     })
 }
 
+<<<<<<< HEAD
 // document.querySelector('#add-expense').addEventListener('submit', addExpense);
+=======
+document.querySelector('#add-expense').addEventListener('submit', addExpense);
+>>>>>>> e7c4ee961611e0f66c28c1a303e2d3510cbb4b43
 reloadPage();
