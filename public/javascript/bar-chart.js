@@ -1,21 +1,26 @@
-Chart.defaults.font.size =18;
-// This data comes from the database. 
-let labels1 = [];
-let data1 = [];
-let colors1 = [];
-let myChart1 = document.getElementById('myPieChart').getContext('2d');
-let chart1 = new Chart(myChart1, {
-    type: 'pie',
+const labels1 = [];
+const data1 = [];
+const colors1 = [];
+
+let myChart2 = document.getElementById('myBarChart').getContext('2d');
+let chart2 = new Chart(myChart2, {
+    type: 'bar',
     data: {
         labels: labels1,
         datasets: [{
-            data: data1,
-            backgroundColor: colors1
-        }]
+                label: 'My Expenses',
+                data: data1,
+                backgroundColor: colors1,
+                borderColor: "#3d3d3d",
+                borderWidth: 1
+            }]
     },
+    options: {
+        indexAxis: 'y'
+    }
 });
 
-// Update values of labels
+// Add Label
 async function updateLabel (event) {
     event.preventDefault();
     const tag_name = document.querySelector('#new_tag').value.trim();
@@ -35,7 +40,7 @@ async function updateLabel (event) {
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
-// Add an expense to a pre-existing tag and reload the page to show changes. 
+// Add expense
 function addExpense (event) {
     event.preventDefault();
     const tag_id = document.querySelector('#tag').value;
@@ -54,7 +59,7 @@ function addExpense (event) {
             tag_id,
             price,
             // we'll get this from the sessions
-            user_id: 2
+            user_id: 1
         })
     })
     .then(res => res.json())
@@ -68,11 +73,12 @@ function addExpense (event) {
 // Reloads page with current data from the Database.
 function reloadPage () {
     // User needs to be dynamic
-    fetch('/api/users/2', {
+    fetch('/api/users/1', {
         method: 'GET'
     })
     .then(tagInfo => tagInfo.json())
     .then(async data => {
+        console.log(data)
         data1.length = 0;
         labels1.length = 0;
         colors1.length = 0;
@@ -90,67 +96,13 @@ function reloadPage () {
             data1.push( await totalExpense['products.total_price'])
             labels1.push( await tagName);
             colors1.push( await tagColor);
+            console.log(totalExpense)
         }
     })
     .then(data => {
-        chart1.update();
+        chart2.update();
     })
 }
-reloadPage();
+
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
-
-// //////////////////////BAR GRAPH///////////////////////////////
-// let labels2 = [
-//     'Fitness',
-//     'Groceries',
-//     'Mortgage/Rent',
-//     'Electricity',
-//     'Recreation',
-//     'clothing',
-//     'dining out',
-//     'drinks',
-//     'entertainment'
-// ];
-// const data = {
-// labels: labels2,
-// datasets: [{
-// data: [65, 59, 80, 81, 156, 55, 40, 93, 91],
-// backgroundColor: [
-//     'rgba(255, 99, 132, 0.2)',
-//     'rgba(255, 159, 64, 0.2)',
-//     'rgba(255, 205, 86, 0.2)',
-//     'rgba(75, 192, 192, 0.2)',
-//     'rgba(54, 162, 235, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(201, 203, 207, 0.2)'
-
-// ],
-// borderColor: [
-//     'rgb(255, 99, 132)',
-//     'rgb(255, 159, 64)',
-//     'rgb(255, 205, 86)',
-//     'rgb(75, 192, 192)',
-//     'rgb(54, 162, 235)',
-//     'rgb(54, 162, 235)',
-//     'rgb(54, 162, 235)',
-//     'rgb(153, 102, 255)',
-//     'rgb(201, 203, 207)'
-// ],
-// borderWidth: 1
-// }]
-// };
-
-// let myChart2 = document.getElementById('myBarChart').getContext('2d');
-// let chart2 = new Chart(myChart2, {
-//     type: 'bar',
-//     data: data,
-//     options: {
-//     scales: {
-//         y: {
-//             beginAtZero: true
-//         }
-//     }
-// },
-// });
+reloadPage();
