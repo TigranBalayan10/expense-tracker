@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const { Product, Tag, User } = require('../../models');
 const { sequelize } = require('../../models/Product');
+const withAuth = require('../../utils/auth');
 
 // Get all products, tags, and users
 router.get('/', (req, res) => {
@@ -77,11 +78,12 @@ router.get('/:id', (req, res) => {
 })
 
 // Create a new product
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
+    console.log(req.session)
     Product.create({
         product_name: req.body.product_name,
         price: req.body.price,
-        user_id: req.body.user_id,
+        user_id: req.session.user_id,
         tag_id: req.body.tag_id
     })
         .then(dbProductData => res.json(dbProductData))
@@ -92,7 +94,7 @@ router.post('/', (req, res) => {
 })
 
 // Update 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Product.update(req.body,{ 
         where: {
             id: req.params.id
@@ -111,7 +113,7 @@ router.put('/:id', (req, res) => {
 })
 
 // Delete Product
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Product.destroy({
         where: {
             id: req.params.id

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 const sequelize = require('sequelize');
+const withAuth = require('../../utils/auth');
 
 // Get all routes
 router.get('/', (req, res) => {
@@ -51,12 +52,12 @@ router.get('/total/:tag_id/:user_id', (req, res) => {
 })
 
 // Create a new tag
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Tag.create({
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
         // Get from session
-        user_id: 1
+        user_id: req.session.user_id
 
     })
         .then(dbTagData => res.json(dbTagData))
@@ -67,7 +68,7 @@ router.post('/', (req, res) => {
 });
 
 // Delete Tag
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Tag.destroy({
         where: {
             id: req.params.id
@@ -88,7 +89,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // Update tag
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Tag.update(req.body,{
         
         where: {

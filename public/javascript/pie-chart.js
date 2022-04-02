@@ -70,7 +70,7 @@ function addExpense (event) {
             tag_id,
             price,
             // we'll get this from the sessions
-            user_id: 1
+            // user_id: 1
         })
     })
     .then(res => res.json())
@@ -84,7 +84,7 @@ function addExpense (event) {
 // Reloads page with current data from the Database.
 function reloadPage () {
     // User needs to be dynamic
-    fetch('/api/users/1', {
+    fetch('/api/users/1', { // ?????
         method: 'GET'
     })
     .then(tagInfo => tagInfo.json())

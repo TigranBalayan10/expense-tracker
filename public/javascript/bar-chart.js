@@ -1,3 +1,6 @@
+const session = require("express-session");
+const req = require("express/lib/request");
+
 const labels1 = [];
 const data1 = [];
 const colors1 = [];
@@ -59,7 +62,7 @@ function addExpense (event) {
             tag_id,
             price,
             // we'll get this from the sessions
-            user_id: 1
+            // user_id: req.session.user_id // ?????
         })
     })
     .then(res => res.json())
@@ -73,7 +76,7 @@ function addExpense (event) {
 // Reloads page with current data from the Database.
 function reloadPage () {
     // User needs to be dynamic
-    fetch('/api/users/1', {
+    fetch('/api/users/1', { // ?????
         method: 'GET'
     })
     .then(tagInfo => tagInfo.json())
