@@ -21,9 +21,9 @@ router.get('/signup', (req, res) => {
 });
 
 // Route to the Dashboard
-// router.get('/dashboard', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
-// });
+router.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+});
 // // get all posts for homepage
 router.get('/', (req, res) => {
   res.send('Hello World')
@@ -59,13 +59,13 @@ router.post('/', (req, res) => {
 });
 
 // login page
-router.get('/dashboard', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/dashboard');
-    return;
-  }
+// router.get('/dashboard', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/dashboard');
+//     return;
+//   }
 
-  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-});
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
 
 module.exports = router;
