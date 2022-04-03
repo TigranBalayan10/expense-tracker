@@ -5,7 +5,6 @@ const path = require('path');
 const withAuth = require('../utils/auth');
 
 
-
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
@@ -38,15 +37,14 @@ router.get('/signup', (req, res) => {
 //   res.send('This triggers the expense modal');
 // });
 
-// // Route to trigger modal for adding Tag
-// router.get('/add-tag', (req, res) => {
-//   res.send('This triggers the tag modal');
-// });
+// Route to trigger modal for adding Tag
+router.get('/add-tag', (req, res) => {
+  res.send('This triggers the tag modal');
+});
 
 // router.get('/history', (req, res) => {
 //   res.send('this triggers the history page');
 // });
-
 
 router.post('/', (req, res) => {
   User.create({
@@ -62,8 +60,19 @@ router.post('/', (req, res) => {
 });
 
 // login page
-router.get('/dashboard', withAuth, (req, res) => {
-  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-});
+// router.get('/dashboard', withAuth, (req, res) => {
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
 
+// router.get('/dashboard', withAuth, (req, res) => {
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
+
+// router.get('/dashboard', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/dashboard');
+//     return;
+//   }
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
 module.exports = router;

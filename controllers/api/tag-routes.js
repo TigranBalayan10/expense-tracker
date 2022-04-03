@@ -23,8 +23,6 @@ router.get('/', (req, res) => {
         );
 });
 
-
-
 // Trying to get one tags and their price total
 router.get('/total/:tag_id/:user_id', (req, res) => {
     Tag.findOne({
@@ -56,7 +54,7 @@ router.post('/', (req, res) => {
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
         // Get from session
-        user_id: 1
+        user_id: req.session.user_id
 
     })
         .then(dbTagData => res.json(dbTagData))
