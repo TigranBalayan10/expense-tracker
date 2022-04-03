@@ -23,7 +23,6 @@ function daysTilFirst () {
 
     }
 }
-
 daysTilFirst();
 // Run every second
 setInterval(daysTilFirst, (1000));
