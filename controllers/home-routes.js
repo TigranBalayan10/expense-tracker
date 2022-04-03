@@ -37,10 +37,17 @@ router.get('/signup', (req, res) => {
 //   res.send('This triggers the expense modal');
 // });
 
+<<<<<<< HEAD
 // // Route to trigger modal for adding Tag
 // router.get('/add-tag', (req, res) => {
 //   res.send('This triggers the tag modal');
 // });
+=======
+// Route to trigger modal for adding Tag
+router.get('/add-tag', (req, res) => {
+  res.send('This triggers the tag modal');
+});
+>>>>>>> 39ad8e8 (added sound effects)
 
 // router.get('/history', (req, res) => {
 //   res.send('this triggers the history page');
@@ -75,4 +82,9 @@ router.get('/dashboard', withAuth, (req, res) => {
 //   }
 //   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 // });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 39ad8e8 (added sound effects)
 module.exports = router;
