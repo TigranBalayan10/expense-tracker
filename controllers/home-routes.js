@@ -60,9 +60,9 @@ router.post('/', (req, res) => {
 });
 
 // login page
-router.get('/dashboard', withAuth, (req, res) => {
-  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-});
+// router.get('/dashboard', withAuth, (req, res) => {
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
 
 // router.get('/dashboard', withAuth, (req, res) => {
 //   res.render('dashboard', { income : `$3400`, expenses: `$1356` });

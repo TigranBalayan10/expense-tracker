@@ -62,12 +62,14 @@ async function updateLabel (event) {
         body: JSON.stringify({
             tag_name,
             tag_color
+            // need to assign user id with sessions
         }),
         headers: {'Content-Type': 'application/json'}
     })
     if(response.ok) {
-        alert('Tag has been added')
+        tagAdded();
     }
+
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
@@ -97,7 +99,7 @@ function addExpense (event) {
     })
     .then(res => res.json())
     .then(data => {
-        // expenseMade();
+        expenseMade();
         updateIncome(data);
     })
     .catch(err => console.log(err));
@@ -116,7 +118,6 @@ function reloadPage () {
         colors.length = 0;
         let userId = data.id;
         let allTags= data.tags
-        console.log(data)
         for(let i = 0; i < allTags.length; i++) {
             let tagId = await allTags[i].id;
             let tagColor = await allTags[i].tag_color;
@@ -126,7 +127,6 @@ function reloadPage () {
                 headers: { 'Content-Type': 'application/json' }
             });
             const totalExpense = await totalCall.json();
-            console.log( await totalExpense)
             
             chartData.push( await totalExpense['products.total_price'])
             labels.push( await tagName);
@@ -207,10 +207,10 @@ updateExpenses();
 function O(i) {
     return typeof i === 'object' ? i : document.getElementById(i)
 }
-
 function expenseMade() {
     O('add-tag-sound').play();
 }
 function tagAdded() {
     O('add-expense-sound').play();
 }
+

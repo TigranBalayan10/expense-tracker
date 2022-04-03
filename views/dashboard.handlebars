@@ -1,25 +1,26 @@
-<audio id='coins-handling'>
-    <source src = "../sounds/mixkit-coins-handling.mp3" type='audio/mp3'>
-</audio>
 <main>
+<audio id='add-tag-sound'>
+    <source src = "/sounds/add-tag.wav" type='audio/wav'>
+    <!-- <source src = "/sounds/coins-handling.ogg" type='audio/ogg'> -->
+</audio>
+<audio id='add-expense-sound'>
+    <source src = "/sounds/add-expense.wav" type='audio/wav'>
+    <!-- <source src = "/sounds/coins-handling.ogg" type='audio/ogg'> -->
+</audio>
     <nav class="navbar navbar-light nav-bar bg-light">
         <div class="container-fluid">
-            {{!-- <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
-                Expenses paid <span id="expenses-paid"></span>
+            <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
+                Expenses paid <span id="total_expenses"></span>
             </div>
             <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
-                Income left <span id="remaining-income"></span>
-            </div> --}}
-            <h2>Total Expenses: <span id="total_expenses">$</span></h2>
-            <h2>Remaining Income: <span id="remaining_income">$</span></h2>
-
-
+                Income left <span id="remaining_income"></span>
+            </div>
             <button class="btn btn-outline-success" id="logout">Logout</button>
         </div>
     </nav>
 
     <div class="container">
-        <div class="row">23
+        <div class="row">
             <div class="col mt-3">
                 <div class="card card-dashboard" style="width: 32rem">
                     <div class="card-body">
@@ -34,10 +35,14 @@
                             </button>
                         </div>
                         <div class="d-grid gap-3">
-                            {{> expense }}
+                            {{> expense products }}
+                        <div class="container">
+                            <h3>Today's Date:</h3>
+                            <h4 id="todays-date"></h4>
+                        </div>
                         <div class="container">
                             <div class="badge bg-secondary text-wrap fs-5" style="width: 30rem"></div>
-                            <h2><span id="countdown" class="text-danger"></span> until the first.</h2>
+                            <h4><span id="countdown" class="text-danger"></span> until the first.</h4>
                             <progress id="countdown-progress" max="100"></progress>
                             </div>
                         </div>
@@ -191,7 +196,6 @@
             crossorigin="anonymous"></script>
         {{!-- charts and money/time logic --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="/javascript/sounds.js"></script>
         <script src="/javascript/money-time.js"></script>
         <script src="/javascript/charts.js"></script>
     </body>
