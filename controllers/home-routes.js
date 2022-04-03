@@ -40,10 +40,9 @@ router.get('/add-tag', (req, res) => {
   res.send('This triggers the tag modal');
 });
 
-router.get('/history', (req, res) => {
-  res.send('this triggers the history page');
-});
-
+// router.get('/history', (req, res) => {
+//   res.send('this triggers the history page');
+// });
 
 router.post('/', (req, res) => {
   User.create({
@@ -64,8 +63,8 @@ router.post('/', (req, res) => {
 //     res.redirect('/dashboard');
 //     return;
 //   }
-
 //   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 // });
+
 
 module.exports = router;
