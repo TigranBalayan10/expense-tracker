@@ -3,9 +3,8 @@ function daysTilFirst () {
     const newDate = new Date();
     const currentYear = newDate.getFullYear();
     const currentMonth = newDate.getMonth() + 1;
+    // Get current day   
     const currentDay = newDate.getDate();
-    // Get current day
-    console.log(currentYear, currentMonth, currentDay);    
     // Determine amount of days in the month
     const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
     console.log(daysInMonth)
@@ -24,9 +23,10 @@ function daysTilFirst () {
 
     }
 }
+
 daysTilFirst();
 // Run every second
-setInterval(daysTilFirst, (1000000));
+setInterval(daysTilFirst, (1000));
 
 // Reset money on the first
 async function payDayCountdown () {
@@ -39,7 +39,7 @@ async function payDayCountdown () {
     // Calculate time remaining
     let remainingTimeInSeconds = (nextMidnight.getTime() - now.getTime())/1000;
     // if it's within 3 seconds of midnight, run this: 
-    if (remainingTimeInSeconds < 312312) {
+    if (remainingTimeInSeconds < 3) {
         let userData = await fetch('/api/users/1', {
             method: 'GET', 
             headers: { 'Content-Type': 'application/json'}
@@ -49,16 +49,12 @@ async function payDayCountdown () {
         const monthlyIncome = await userData.monthly_income;
         // Get all monthly bills
         let productsArray = await userData.products
-        console.log( await productsArray);
         for(let i = 0; i < productsArray.length; i++) {
             if (productsArray[i].monthly_bill) {
                 priceParsed = parseInt(productsArray[i].price)
                 monthlyBills += await priceParsed;
             }
         }
-        console.log(monthlyBills);
-        console.log(monthlyIncome);
-        console.log(userData);
         // These are the two numbers posted in the header. 
         const totalExpenses = monthlyBills;
         const remainingMoney = monthlyIncome - monthlyBills;
@@ -69,13 +65,9 @@ async function payDayCountdown () {
             }),
             headers: { 'Content-Type': 'application/json'}
         });
-        userUpdate = await userUpdate.json();
-        console.log(userUpdate);
-
-        
+        userUpdate = await userUpdate.json(); 
         // make a function that gets the remaining amount of money before reset, saves it, and line-graphs it. 
     }
 }
 
 // payDayCountdown();
-// Deduct monthly costs

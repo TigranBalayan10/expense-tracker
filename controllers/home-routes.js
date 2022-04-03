@@ -47,7 +47,6 @@ router.get('/signup', (req, res) => {
 //   res.send('this triggers the history page');
 // });
 
-
 router.post('/', (req, res) => {
   User.create({
     username: req.body.username,
@@ -65,5 +64,6 @@ router.post('/', (req, res) => {
 router.get('/dashboard', withAuth, (req, res) => {
   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 });
+
 
 module.exports = router;
