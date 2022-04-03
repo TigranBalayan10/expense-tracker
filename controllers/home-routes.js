@@ -23,9 +23,9 @@ router.get('/signup', (req, res) => {
 });
 
 // Route to the Dashboard
-// router.get('/dashboard', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
-// });
+router.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+});
 
 // // get all posts for homepage
 // router.get('/', (req, res) => {
@@ -38,17 +38,10 @@ router.get('/signup', (req, res) => {
 //   res.send('This triggers the expense modal');
 // });
 
-<<<<<<< HEAD
 // // Route to trigger modal for adding Tag
 // router.get('/add-tag', (req, res) => {
 //   res.send('This triggers the tag modal');
 // });
-=======
-// Route to trigger modal for adding Tag
-router.get('/add-tag', (req, res) => {
-  res.send('This triggers the tag modal');
-});
->>>>>>> 39ad8e8 (added sound effects)
 
 // router.get('/history', (req, res) => {
 //   res.send('this triggers the history page');
@@ -68,12 +61,14 @@ router.post('/', (req, res) => {
 });
 
 // login page
-<<<<<<< HEAD
 router.get('/dashboard', withAuth, (req, res) => {
   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 });
 
-=======
+// router.get('/dashboard', withAuth, (req, res) => {
+//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+// });
+
 // router.get('/dashboard', (req, res) => {
 //   if (req.session.loggedIn) {
 //     res.redirect('/dashboard');
@@ -81,7 +76,4 @@ router.get('/dashboard', withAuth, (req, res) => {
 //   }
 //   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 // });
->>>>>>> 39ad8e8 (added sound effects)
-
-
 module.exports = router;
