@@ -4,18 +4,22 @@
 <main>
     <nav class="navbar navbar-light nav-bar bg-light">
         <div class="container-fluid">
-            <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
-                Expenses paid {{expenses}}
+            {{!-- <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
+                Expenses paid <span id="expenses-paid"></span>
             </div>
             <div class="badge bg-success text-wrap fs-5" style="width: 10rem">
-                Income left {{income}}
-            </div>
+                Income left <span id="remaining-income"></span>
+            </div> --}}
+            <h2>Total Expenses: <span id="total_expenses">$</span></h2>
+            <h2>Remaining Income: <span id="remaining_income">$</span></h2>
+
+
             <button class="btn btn-outline-success" id="logout">Logout</button>
         </div>
     </nav>
 
     <div class="container">
-        <div class="row">
+        <div class="row">23
             <div class="col mt-3">
                 <div class="card card-dashboard" style="width: 32rem">
                     <div class="card-body">
@@ -31,8 +35,10 @@
                         </div>
                         <div class="d-grid gap-3">
                             {{> expense }}
-                            <div class="badge bg-secondary text-wrap fs-5" style="width: 30rem">
-                                26 days until the end of the month
+                        <div class="container">
+                            <div class="badge bg-secondary text-wrap fs-5" style="width: 30rem"></div>
+                            <h2><span id="countdown" class="text-danger"></span> until the first.</h2>
+                            <progress id="countdown-progress" max="100"></progress>
                             </div>
                         </div>
                     </div>
@@ -60,32 +66,40 @@
                     <h5 class="modal-title" id="addExpenseModal">Add Expense</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-grid gap-3">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="fs-5">Product Tags</h4>
-                        {{> dropdown}}
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <h4 class="fs-5">Product</h4>
-                        <div class="d-flex justify-content-end">
-                            <input type="text" class="form-control" id="product-input" placeholder="Product"
-                                aria-label="Product" aria-describedby="addon-wrapping" />
+                <form id="add-expense">
+                    <div class="modal-body d-grid gap-3">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="fs-5">Product Tags</h4>
+                            {{> dropdown}}
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="fs-5">Product</h4>
+                            <div class="d-flex justify-content-end">
+                                <input type="text" class="form-control" id="item" placeholder="Product"
+                                    aria-label="Product" aria-describedby="addon-wrapping" />
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="fs-5">Price</h4>
+                            <div class="d-flex justify-content-end">
+                                <input type="text" class="form-control" id="price" placeholder="$" aria-label="$"
+                                    aria-describedby="addon-wrapping" />
+                            </div>
+                        </div>
+                        <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="monthly_bill">
+                                <label class="form-check-label" for="monthly_bill">
+                                Monthly Bill
+                                </label>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <h4 class="fs-5">Price</h4>
-                        <div class="d-flex justify-content-end">
-                            <input type="text" class="form-control" id="price-input" placeholder="$" aria-label="$"
-                                aria-describedby="addon-wrapping" />
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-success">Add</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-success" id="add-expense">Add</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -102,16 +116,22 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="fs-5">Tag</h4>
                         <div class="d-flex justify-content-end">
-                            <input type="text" class="form-control" id="add-tag" placeholder="Add Tag"
-                                aria-label="Add Tag" aria-describedby="addon-wrapping" />
+                            <form id="add-tag">
+                            <label for="new_tag" class="form-label mt-4">Name</label>
+                            <input type="text" class="form-control" id="new_tag" name="new_tag" placeholder="required"required>
+                            <label for="tag_color" class="form-label mt-4">Pick a color</label>
+                            <input type="color" id="tag_color" name="tag_color" required>
+                            <div class="mt-3">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-success" id="add-tag-btn">Add</button>
+                            </div>
+                            </div>
+                        </form>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="submit" class="btn btn-success" id="add-tag-btn">Add</button>
                 </div>
             </div>
         </div>
@@ -163,7 +183,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="/javascript/dashboard.js"></script>
+    {{!-- <script src="/javascript/dashboard.js"></script> --}}
     <script src="/javascript/logout.js"></script>
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -171,9 +191,9 @@
             crossorigin="anonymous"></script>
         {{!-- charts and money/time logic --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/javascript/sounds.js"></script>
         <script src="/javascript/money-time.js"></script>
         <script src="/javascript/charts.js"></script>
-        <script src="'/javascript/sounds.js"></script>
     </body>
 </main>
 

@@ -23,7 +23,6 @@ function daysTilFirst () {
 
     }
 }
-
 daysTilFirst();
 // Run every second
 setInterval(daysTilFirst, (1000));
@@ -56,8 +55,8 @@ async function payDayCountdown () {
             }
         }
         // These are the two numbers posted in the header. 
-        const totalExpenses = monthlyBills;
-        const remainingMoney = monthlyIncome - monthlyBills;
+        totalExpenses = monthlyBills;
+        remainingMoney = monthlyIncome - monthlyBills;
         let userUpdate = await fetch('/api/users/1', {
             method: 'PUT',
             body: JSON.stringify({
@@ -69,5 +68,8 @@ async function payDayCountdown () {
         // make a function that gets the remaining amount of money before reset, saves it, and line-graphs it. 
     }
 }
+
+// document.querySelector('#remaining-income').value = remainingMoney;
+// document.querySelector('#expenses-paid').value = totalExpenses
 
 // payDayCountdown();

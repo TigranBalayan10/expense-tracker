@@ -5,7 +5,6 @@ const path = require('path');
 const withAuth = require('../utils/auth');
 
 
-
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
@@ -23,9 +22,9 @@ router.get('/signup', (req, res) => {
 });
 
 // Route to the Dashboard
-router.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
-});
+// router.get('/dashboard', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+// });
 
 // // get all posts for homepage
 // router.get('/', (req, res) => {
@@ -61,9 +60,9 @@ router.post('/', (req, res) => {
 });
 
 // login page
-// router.get('/dashboard', withAuth, (req, res) => {
-//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-// });
+router.get('/dashboard', withAuth, (req, res) => {
+  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+});
 
 
 
