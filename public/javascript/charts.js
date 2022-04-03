@@ -77,7 +77,6 @@ function addExpense (event) {
     const product_name = document.querySelector('#item').value.trim();
     const price = document.querySelector('#price').value.trim();
     const monthly_bill = document.querySelector('#monthly_bill').checked;
-    console.log('monthly ' + monthly_bill)
 
     // send this new expense to server/db
     fetch('/api/products', {
@@ -97,9 +96,7 @@ function addExpense (event) {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         updateIncome(data);
-        reloadPage(); 
     })
     .catch(err => console.log(err));
 }
@@ -137,15 +134,13 @@ function reloadPage () {
     })
 }
 
+// Update Remaining Income when purchase is made
 async function updateIncome(data) {
     const response = await fetch('/api/users/1', {
         method: 'GET', 
         headers: { 'Content-Type': 'application/json'}
     })
     const userData = await response.json();
-    console.log( await userData);
-    console.log( await data)
-    console.log( await userData.monthly_income)
     // get price from expense
     const price = data.price;
     const currentIncome = userData.monthly_income
@@ -158,20 +153,18 @@ async function updateIncome(data) {
         headers: { 'Content-Type': 'application/json'}
     });
     userUpdate = await userUpdate.json();
-    console.log( await userUpdate)
     // Attach the  Current Income here. 
     document.querySelector('#remaining_income').innerHTML = currentIncome;
     updateExpenses();
 }
 
-
-// How do I update total expenses? 
+// Update total expenses when a purchase is made
 async function updateExpenses () {
-    // empty array for all the products in same month
+    // Empty array for all the products in same month
     let monthlyProducts = [];
-    // empty number where prices will be added to
+    // Empty number where prices will be added to
     let monthlyTotal = 0;
-    // get all expenses prices of the current month. 
+    // Get all expenses prices of the current month. 
     const response = await fetch('/api/products/monthly/1', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json'}
@@ -182,7 +175,6 @@ async function updateExpenses () {
         const createdMonth = date.getMonth() + 1;
         const today = new Date();
         const currentMonth = today.getMonth() + 1;
-        console.log(createdMonth, currentMonth)
         if (createdMonth === currentMonth) {
             monthlyProducts.push(product);
         }
@@ -191,9 +183,8 @@ async function updateExpenses () {
         const price = parseInt(product.price)
         monthlyTotal += price;
     });
+    // This is where we get the total Expenses
     document.querySelector('#total_expenses').innerHTML = monthlyTotal;
-    console.log(monthlyProducts)
-    console.log( await allProducts);
     reloadPage();
 }
 
