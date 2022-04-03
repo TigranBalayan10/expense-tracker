@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Product, Tag } = require('../models');
 const path = require('path');
+const withAuth = require('../utils/auth');
 
 
 
@@ -17,32 +18,34 @@ router.get('/', (req, res) => {
 
 // Route to registration page
 router.get('/signup', (req, res) => {
+  console.log("pizdec hamar 2");
     res.render('signup');
 });
 
 // Route to the Dashboard
-router.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
-});
+// router.get('/dashboard', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
+// });
+
 // // get all posts for homepage
-router.get('/', (req, res) => {
-  res.send('Hello World')
+// router.get('/', (req, res) => {
+//   res.send('Hello World')
 
-});
+// });
 
-// Route to trigger modal for adding expense
-router.get('/add-expense', (req, res) => {
-  res.send('This triggers the expense modal');
-});
+// // Route to trigger modal for adding expense
+// router.get('/add-expense', (req, res) => {
+//   res.send('This triggers the expense modal');
+// });
 
-// Route to trigger modal for adding Tag
-router.get('/add-tag', (req, res) => {
-  res.send('This triggers the tag modal');
-});
+// // Route to trigger modal for adding Tag
+// router.get('/add-tag', (req, res) => {
+//   res.send('This triggers the tag modal');
+// });
 
-router.get('/history', (req, res) => {
-  res.send('this triggers the history page');
-});
+// router.get('/history', (req, res) => {
+//   res.send('this triggers the history page');
+// });
 
 
 router.post('/', (req, res) => {
@@ -59,13 +62,8 @@ router.post('/', (req, res) => {
 });
 
 // login page
-// router.get('/dashboard', (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect('/dashboard');
-//     return;
-//   }
-
-//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-// });
+router.get('/dashboard', withAuth, (req, res) => {
+  res.render('dashboard', { income : `$3400`, expenses: `$1356` });
+});
 
 module.exports = router;
