@@ -82,7 +82,8 @@ router.post('/', (req, res) => {
         product_name: req.body.product_name,
         price: req.body.price,
         user_id: req.body.user_id,
-        tag_id: req.body.tag_id
+        tag_id: req.body.tag_id,
+        monthly_bill: req.body.monthly_bill
     })
         .then(dbProductData => res.json(dbProductData))
         .catch(err => {
@@ -132,5 +133,20 @@ router.delete('/:id', (req, res) => {
         );
 });
 
+// Get all products in current Month:
+router.get('/monthly/:id', (req, res) => {
+    Product.findAll({
+        where: {
+            user_id: req.params.id
+        }
+    })
+    .then((products) => {
+        res.json(products)
+    })
+    .catch(err => {
+        console.log(err);
+        res.json(err)
+    })
+});
 
 module.exports = router;

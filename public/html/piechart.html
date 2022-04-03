@@ -35,6 +35,14 @@
                         <label for="price" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" placeholder="required" required>
                     </div>
+                    <div class="mt-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" id="monthly_bill">
+                            <label class="form-check-label" for="monthly_bill">
+                            Monthly Bill
+                            </label>
+                        </div>
+                    </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary mb-3">Add Expense</button>
                     </div>
@@ -56,15 +64,17 @@
                     <progress id="countdown-progress" max="100"></progress>
                 </div>
                 <canvas id="myPieChart"></canvas>
+                <div class="container">
+                    <h2>Total Expenses: <span id="total_expenses"></span></h2>
+                    <h2>Remaining Income: <span id="remaining_income"></span></h2>
+                </div>
                 <canvas id="myBarChart"></canvas>
             </div>
         </div>
     </div>
     <!-- Charts js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="/javascript/bar-chart.js"></script> -->
     <script src="/javascript/money-time.js"></script>
-    <!-- <script src="/javascript/pie-chart.js"></script> -->
     <script src="/javascript/charts.js"></script>
 </body>
 </html>
