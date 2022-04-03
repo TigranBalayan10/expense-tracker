@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
         // Get from session
-        user_id: 1
+        user_id: req.session.user_id
 
     })
         .then(dbTagData => res.json(dbTagData))

@@ -70,3 +70,15 @@ async function payDayCountdown () {
 }
 
 // payDayCountdown();
+
+// Set date 
+function currentDate () {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    const year = now.getFullYear();
+
+    const todayDate = `${month}/${date}/${year}`;
+    document.querySelector('#todays-date').innerHTML = todayDate;
+}
+currentDate();
