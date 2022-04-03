@@ -29,3 +29,7 @@ body {
 .sign-up-a {
   text-decoration: none;
 }
+
+#sign-up {
+  display: inline-block;
+}
