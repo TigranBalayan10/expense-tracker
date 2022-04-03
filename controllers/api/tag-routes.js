@@ -23,8 +23,6 @@ router.get('/', (req, res) => {
         );
 });
 
-
-
 // Trying to get one tags and their price total
 router.get('/total/:tag_id/:user_id', (req, res) => {
     Tag.findOne({

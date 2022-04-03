@@ -1,6 +1,7 @@
 Chart.defaults.font.size =15;
 Chart.defaults.color = '#000'
 Chart.defaults.scale.ticks.beginAtZero = true
+
 // This data comes from the database. 
 let labels = [];
 let chartData = [];
@@ -96,6 +97,7 @@ function addExpense (event) {
     })
     .then(res => res.json())
     .then(data => {
+        // expenseMade();
         updateIncome(data);
     })
     .catch(err => console.log(err));
@@ -114,6 +116,7 @@ function reloadPage () {
         colors.length = 0;
         let userId = data.id;
         let allTags= data.tags
+        console.log(data)
         for(let i = 0; i < allTags.length; i++) {
             let tagId = await allTags[i].id;
             let tagColor = await allTags[i].tag_color;
@@ -123,6 +126,8 @@ function reloadPage () {
                 headers: { 'Content-Type': 'application/json' }
             });
             const totalExpense = await totalCall.json();
+            console.log( await totalExpense)
+            
             chartData.push( await totalExpense['products.total_price'])
             labels.push( await tagName);
             colors.push( await tagColor);
@@ -185,8 +190,27 @@ async function updateExpenses () {
     });
     // This is where we get the total Expenses
     document.querySelector('#total_expenses').innerHTML = monthlyTotal;
+    const response2 = await fetch('/api/users/1', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    userData = await response2.json();
+    const monthlyIncome = userData.monthly_income;
+    document.querySelector('#remaining_income').innerHTML = monthlyIncome
     reloadPage();
 }
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
-reloadPage();
+updateExpenses();
+
+//////////Sounds//////////////
+function O(i) {
+    return typeof i === 'object' ? i : document.getElementById(i)
+}
+
+function expenseMade() {
+    O('add-tag-sound').play();
+}
+function tagAdded() {
+    O('add-expense-sound').play();
+}

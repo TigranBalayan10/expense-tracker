@@ -15,6 +15,3 @@ function expenseMade() {
 function tagAdded() {
     O('add-expense-sound').play();
 }
-
-document.querySelector('#add-tag-btn').addEventListener('click', tagAdded);
-document.querySelector('#add-expense-btn').addEventListener('click', expenseMade);
