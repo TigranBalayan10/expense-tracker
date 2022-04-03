@@ -97,7 +97,7 @@ function addExpense (event) {
     })
     .then(res => res.json())
     .then(data => {
-        // expenseMade();
+        expenseMade();
         updateIncome(data);
     })
     .catch(err => console.log(err));
