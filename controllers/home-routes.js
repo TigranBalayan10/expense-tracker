@@ -38,10 +38,10 @@ router.get('/signup', (req, res) => {
 //   res.send('This triggers the expense modal');
 // });
 
-// // Route to trigger modal for adding Tag
-// router.get('/add-tag', (req, res) => {
-//   res.send('This triggers the tag modal');
-// });
+// Route to trigger modal for adding Tag
+router.get('/add-tag', (req, res) => {
+  res.send('This triggers the tag modal');
+});
 
 // router.get('/history', (req, res) => {
 //   res.send('this triggers the history page');
@@ -64,6 +64,7 @@ router.post('/', (req, res) => {
 router.get('/dashboard', withAuth, (req, res) => {
   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
 });
+
 
 
 module.exports = router;
