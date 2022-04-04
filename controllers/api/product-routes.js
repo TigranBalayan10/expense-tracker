@@ -39,7 +39,6 @@ router.get('/total/:tag_id/:user_id', (req, res) => {
         ]
     })
     .then(dbProductData => {
-        console.log(dbProductData);
         res.json(dbProductData);
     })
     .catch(err => res.json(err))

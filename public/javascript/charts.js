@@ -1,13 +1,23 @@
-const id = window.location.toString().split('/')[
-    window.location.toString().split('/').length - 1
-];
-console.log(id)
+// Grab the req.session.user_id
+let id;
+async function grabUserData () {
+    const response = await fetch('/api/users/loggedin', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    const userData = await response.json()
+    console.log(await userData)
+    const userId = await userData.id;
+    id = await userId;
+    await updateExpenses();
+};
+grabUserData();
 
 
+// CHART SETUP
 Chart.defaults.font.size =15;
 Chart.defaults.color = '#000'
 Chart.defaults.scale.ticks.beginAtZero = true
-
 // This data comes from the database. 
 let labels = [];
 let chartData = [];
@@ -67,20 +77,19 @@ async function updateLabel (event) {
         method: 'POST', 
         body: JSON.stringify({
             tag_name,
-            tag_color
-            // need to assign user id with sessions
+            tag_color,
+            user_id: id
         }),
         headers: {'Content-Type': 'application/json'}
     })
     if(response.ok) {
         tagAdded();
     }
-
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
 // Add an expense to a pre-existing tag and reload the page to show changes. 
-function addExpense (event) {
+async function addExpense (event) {
     event.preventDefault();
     const tag_id = document.querySelector('#tag').value;
     const product_name = document.querySelector('#item').value.trim();
@@ -94,12 +103,10 @@ function addExpense (event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ 
-            product_name,
-            // This will be dynamic with the handlebars. 
+            product_name, 
             tag_id,
             price,
-            // we'll get this from the sessions
-            user_id: 1,
+            user_id: id,
             monthly_bill: monthly_bill
         })
     })
@@ -109,15 +116,76 @@ function addExpense (event) {
         updateIncome(data);
     })
     .catch(err => console.log(err));
+};
+
+// Update Remaining Income when purchase is made
+async function updateIncome(data) {
+    const response = await fetch(`api/users/${id}`, {
+        method: 'GET', 
+        headers: { 'Content-Type': 'application/json'}
+    });
+    const userData = await response.json();
+    // get price from expense
+    const price = await data.price;
+    const currentIncome = await userData.monthly_income;
+    const remainingMoney = await currentIncome - price;
+    let userUpdate = await fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            monthly_income: remainingMoney
+        }),
+        headers: { 'Content-Type': 'application/json'}
+    });
+    userUpdate = await userUpdate.json();
+    console.log(remainingMoney)
+    // Attach the  Current Income here. 
+    document.querySelector('#remaining_income').innerHTML = currentIncome;
+    updateExpenses();
 }
 
-// Reloads page with current data from the Database.
+// Update total expenses when a purchase is made
+async function updateExpenses () {
+    // Empty array for all the products in same month
+    let monthlyProducts = [];
+    // Empty number where prices will be added to
+    let monthlyTotal = 0;
+    // Get all expenses prices of the current month. 
+    const response = await fetch(`/api/products/monthly/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    const allProducts = await response.json();
+    allProducts.forEach( product => {
+        const date = new Date(product.createdAt);
+        const createdMonth = date.getMonth() + 1;
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1;
+        if (createdMonth === currentMonth) {
+            monthlyProducts.push(product);
+        }
+    });
+    monthlyProducts.forEach(product => {
+        const price = parseInt(product.price)
+        monthlyTotal += price;
+    });
+    // This is where we get the total Expenses
+    document.querySelector('#total_expenses').innerHTML = monthlyTotal;
+
+    const response2 = await fetch(`/api/users/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    userData = await response2.json();
+    const monthlyIncome = userData.monthly_income;
+    document.querySelector('#remaining_income').innerHTML = monthlyIncome
+    reloadPage();
+}
+// Reloads page with current data from the Database. Arrays for charts
 function reloadPage () {
-    // User needs to be dynamic
-    fetch('/api/users/1', {
+    fetch(`/api/users/${id}`, {
         method: 'GET'
     })
-    .then(tagInfo => tagInfo.json())
+    .then(userData=> userData.json())
     .then(async data => {
         chartData.length = 0;
         labels.length = 0;
@@ -145,69 +213,7 @@ function reloadPage () {
     })
 }
 
-// Update Remaining Income when purchase is made
-async function updateIncome(data) {
-    const response = await fetch('/api/users/1', {
-        method: 'GET', 
-        headers: { 'Content-Type': 'application/json'}
-    })
-    const userData = await response.json();
-    // get price from expense
-    const price = data.price;
-    const currentIncome = userData.monthly_income
-    const remainingMoney = currentIncome - price;
-    let userUpdate = await fetch('/api/users/1', {
-        method: 'PUT',
-        body: JSON.stringify({
-            monthly_income: remainingMoney
-        }),
-        headers: { 'Content-Type': 'application/json'}
-    });
-    userUpdate = await userUpdate.json();
-    // Attach the  Current Income here. 
-    document.querySelector('#remaining_income').innerHTML = currentIncome;
-    updateExpenses();
-}
-
-// Update total expenses when a purchase is made
-async function updateExpenses () {
-    // Empty array for all the products in same month
-    let monthlyProducts = [];
-    // Empty number where prices will be added to
-    let monthlyTotal = 0;
-    // Get all expenses prices of the current month. 
-    const response = await fetch('/api/products/monthly/1', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json'}
-    });
-    const allProducts = await response.json();
-    allProducts.forEach( product => {
-        const date = new Date(product.createdAt);
-        const createdMonth = date.getMonth() + 1;
-        const today = new Date();
-        const currentMonth = today.getMonth() + 1;
-        if (createdMonth === currentMonth) {
-            monthlyProducts.push(product);
-        }
-    });
-    monthlyProducts.forEach(product => {
-        const price = parseInt(product.price)
-        monthlyTotal += price;
-    });
-    // This is where we get the total Expenses
-    document.querySelector('#total_expenses').innerHTML = monthlyTotal;
-    const response2 = await fetch('/api/users/1', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json'}
-    });
-    userData = await response2.json();
-    const monthlyIncome = userData.monthly_income;
-    document.querySelector('#remaining_income').innerHTML = monthlyIncome
-    reloadPage();
-}
-
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
-updateExpenses();
 
 //////////Sounds//////////////
 function O(i) {
@@ -220,3 +226,24 @@ function tagAdded() {
     O('add-expense-sound').play();
 }
 
+
+
+// const newUser = new User(grabUserData()) ??????
+// class CurrentUser {
+//     constructor(id) {
+//         this.id = id
+//     }
+//     get RemainingIncome(){
+
+//     }
+//     get TotalExpenses(){
+    
+//     }
+//     addExpense() {
+        // document.querySelector here???
+
+//     }
+//     addTag() {
+
+//     }
+// }

@@ -19,7 +19,6 @@ router.get('/', withAuth, (req, res) => {
     })
         .then(dbProductData => {
             const products = dbProductData.map(product => product.get({ plain: true }));
-            console.log(products)
             res.render('dashboard', {
                 products,
                 loggedIn: true,
