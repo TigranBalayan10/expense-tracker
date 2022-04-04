@@ -4,6 +4,7 @@ async function editProduct(event) {
   const product_name = document.querySelector("#edit-product").value.trim();
   const price = document.querySelector("#edit-price").value.trim();
   const tag_name = document.querySelector("#edit-tag").value.trim();
+  const tag_color = document.querySelector("#edit-tag_color").value;
   //   const id = window.location.toString().split("/")[
   //     window.location.toString().split("/").length - 1
   //   ];
