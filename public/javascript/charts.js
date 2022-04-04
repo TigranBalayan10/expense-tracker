@@ -1,3 +1,9 @@
+const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+];
+console.log(id)
+
+
 Chart.defaults.font.size =15;
 Chart.defaults.color = '#000'
 Chart.defaults.scale.ticks.beginAtZero = true

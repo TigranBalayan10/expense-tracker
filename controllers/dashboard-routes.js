@@ -11,8 +11,8 @@ router.get('/', withAuth, (req, res) => {
         include: [{
             model: Tag,
             attributes: ['tag_name', 'tag_color']
-        }],
-        include: [{
+        },
+        {
             model: User,
             attributes: ['username', 'monthly_income']
         }]

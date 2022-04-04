@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { Product, Tag, User } = require('../../models');
 const { sequelize } = require('../../models/Product');
 
@@ -12,7 +11,7 @@ router.get('/', (req, res) => {
             },
             {
                 model: User,
-                attributes: {exclude: ['password']},
+                attributes: {exclude: ['password']}
             }
         ],
     })
