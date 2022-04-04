@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+
 // Create User
 router.post('/signup', (req, res) => {
     User.create({
