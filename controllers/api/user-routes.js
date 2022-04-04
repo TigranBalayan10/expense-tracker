@@ -2,7 +2,34 @@ const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
+// Get one user
+router.get('/:id', (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: { exclude: ['password'] },
+        include: [
+            {
+                model: Product,
+            },
+            {
+                model: Tag
+            }
+    ],
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+})
 // Create User
 router.post('/signup', (req, res) => {
     User.create({

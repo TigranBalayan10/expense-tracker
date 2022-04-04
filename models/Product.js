@@ -11,12 +11,14 @@ Product.init(
             primaryKey: true,
             autoIncrement: true
         },
-
         product_name: {
             type: DataTypes.STRING,
             allowNull: true
         },
-
+        monthly_bill: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         price: {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false
@@ -40,7 +42,7 @@ Product.init(
     },
     {
         sequelize,
-        timestamps: false,
+        createdAt: sequelize.DATE,
         freezeTableName: true,
         underscored: true,
         modelName: 'product'
