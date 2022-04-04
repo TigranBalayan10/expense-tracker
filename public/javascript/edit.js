@@ -2,7 +2,7 @@
 async function editProduct(event) {
   event.preventDefault();
   const product_name = document.querySelector("#edit-product").value.trim();
-  const price = document.querySelector("#edit-price").value;
+  const price = document.querySelector("#edit-price").value.trim();
   const tag_name = document.querySelector("#edit-tag").value.trim();
   //   const id = window.location.toString().split("/")[
   //     window.location.toString().split("/").length - 1
@@ -21,6 +21,7 @@ async function editProduct(event) {
     method: "PUT",
     body: JSON.stringify({
       tag_name,
+      tag_color,
     }),
     headers: { "Content-Type": "application/json" },
   });
