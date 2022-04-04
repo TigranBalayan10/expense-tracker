@@ -8,18 +8,18 @@ router.get('/', withAuth, (req, res) => {
         where: {
             user_id: req.session.user_id
         },
-        attributes: ['product_name', 'price', 'tag_id'],
         include: [{
             model: Tag,
             attributes: ['tag_name', 'tag_color']
         }],
         include: [{
             model: User,
-            attributes: ['username']
+            attributes: ['username', 'monthly_income']
         }]
     })
         .then(dbProductData => {
             const products = dbProductData.map(product => product.get({ plain: true }));
+            console.log(products)
             res.render('dashboard', {
                 products,
                 loggedIn: true,

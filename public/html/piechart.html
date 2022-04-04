@@ -10,6 +10,14 @@
     <title>Document</title>
 </head>
 <body>
+    <audio id='add-tag-sound'>
+        <source src = "/sounds/add-tag.wav" type='audio/wav'>
+        <!-- <source src = "/sounds/coins-handling.ogg" type='audio/ogg'> -->
+    </audio>
+    <audio id='add-expense-sound'>
+        <source src = "/sounds/add-expense.wav" type='audio/wav'>
+        <!-- <source src = "/sounds/coins-handling.ogg" type='audio/ogg'> -->
+    </audio>
     <div class="container mt-5">
         <div class="row">
             <div class="col">
@@ -35,8 +43,16 @@
                         <label for="price" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" placeholder="required" required>
                     </div>
+                    <div class="mt-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" id="monthly_bill">
+                            <label class="form-check-label" for="monthly_bill">
+                            Monthly Bill
+                            </label>
+                        </div>
+                    </div>
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-primary mb-3">Add Expense</button>
+                        <button type="submit" class="btn btn-primary mb-3" id="add-expense-btn">Add Expense</button>
                     </div>
                 </form>
                 <form id="add-tag">
@@ -45,26 +61,29 @@
                     <label for="tag_color" class="form-label mt-4">Pick a color</label>
                     <input type="color" id="tag_color" name="tag_color" required>
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-primary mb-3">Add Tag</button>
+                        <button type="submit" class="btn btn-primary mb-3" id="add-tag-btn">Add Tag</button>
                     </div>
                 </form>
             </div>
             <div class="col mt-5">
                 <div class="container">
                     <h2><span id="countdown" class="text-danger"></span> until the first.</h2>
-                    <label for="file">Countdown</label>
                     <progress id="countdown-progress" max="100"></progress>
                 </div>
                 <canvas id="myPieChart"></canvas>
+                <div class="container">
+                    <h2>Total Expenses: <span id="total_expenses"></span></h2>
+                    <h2>Remaining Income: <span id="remaining_income"></span></h2>
+                </div>
                 <canvas id="myBarChart"></canvas>
             </div>
+            <button id="sound-maker-btn">Hit me</button>
         </div>
     </div>
     <!-- Charts js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="../javascript/pie-chart.js"></script> -->
-    <script src="/javascript/bar-chart.js"></script>
     <script src="/javascript/money-time.js"></script>
-    <script src="../javascript/pie-chart.js"></script>
+    <script src="/javascript/charts.js"></script>
+    <script src="/javascript/sounds.js"></script>
 </body>
 </html>

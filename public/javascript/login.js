@@ -5,10 +5,10 @@ async function loginFormHandler(event) {
   const password = document.querySelector("#floatingPassword").value.trim();
   console.log(login, password);
   if (login && password) {
-    const response = await fetch("/login", {
+    const response = await fetch("/api/users/login", {
       method: "post",
       body: JSON.stringify({
-        login,
+        username: login,
         password,
       }),
       headers: { "Content-Type": "application/json" },
@@ -23,5 +23,3 @@ async function loginFormHandler(event) {
 }
 
 document.querySelector("#login").addEventListener("click", loginFormHandler);
-
-
