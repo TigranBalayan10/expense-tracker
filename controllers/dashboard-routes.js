@@ -19,7 +19,7 @@ router.get('/', withAuth, (req, res) => {
     })
         .then(dbProductData => {
             const products = dbProductData.map(product => product.get({ plain: true }));
-            console.log(products)
+            console.log(products, "This is Product object============")
             res.render('dashboard', {
                 products,
                 loggedIn: true,
@@ -48,7 +48,7 @@ router.put('/edit/:id', withAuth, (req, res) => {
     })
         .then(dbProductData => {
             const product = dbProductData.get({ plain: true });
-            res.render('edit-product', {
+            res.render('edit-expense', {
                 product,
                 loggedIn: true,
                 username: req.session.username
