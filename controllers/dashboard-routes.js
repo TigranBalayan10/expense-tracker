@@ -3,25 +3,53 @@ const sequelize = require('../config/connection');
 const { Tag, Product, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+// router.get('/', withAuth, (req, res) => {
+//     Product.findAll({
+//         where: {
+//             user_id: req.session.user_id
+//         },
+//         include: [{
+//             model: Tag,
+//             attributes: ['tag_name', 'tag_color']
+//         },
+//         {
+//             model: User,
+//             attributes: ['username', 'monthly_income']
+//         }]
+//     })
+//         .then(dbProductData => {
+//             const products = dbProductData.map(product => product.get({ plain: true }));
+//             console.log(products, "This is Product object============")
+//             res.render('dashboard', {
+//                 products,
+//                 loggedIn: true,
+//                 username: req.session.username
+//             });
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         }
+//         );
+// })
 router.get('/', withAuth, (req, res) => {
-    Product.findAll({
+    Tag.findAll({
         where: {
             user_id: req.session.user_id
         },
         include: [{
-            model: Tag,
-            attributes: ['tag_name', 'tag_color']
+            model: Product,
         },
         {
             model: User,
-            attributes: ['username', 'monthly_income']
+            attributes: { exclude: ['password']}
         }]
     })
         .then(dbProductData => {
-            const products = dbProductData.map(product => product.get({ plain: true }));
-            console.log(products, "This is Product object============")
+            const Tags = dbProductData.map(tag => tag.get({ plain: true }));
+            console.log(Tags, "This is Product object============")
             res.render('dashboard', {
-                products,
+                Tags,
                 loggedIn: true,
                 username: req.session.username
             });
