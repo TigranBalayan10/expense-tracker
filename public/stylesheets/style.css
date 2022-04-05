@@ -33,3 +33,8 @@ body {
 #sign-up {
   display: inline-block;
 }
+
+.nav-bar-dash {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px 0 20px 0;
+}
