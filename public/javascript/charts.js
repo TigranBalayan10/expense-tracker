@@ -10,12 +10,9 @@ async function grabUserData () {
     const userId = await userData.id;
     id = await userId;
     await updateExpenses();
-    await updateIncome()
 };
 
-
 grabUserData();
-
 
 // CHART SETUP
 Chart.defaults.font.size =15;
@@ -90,8 +87,8 @@ async function updateLabel (event) {
     })
     if(response.ok) {
         tagAdded();
-        window.location.reload();
     }
+    window.location.reload();
 }
 document.querySelector("#add-tag").addEventListener("submit", updateLabel);
 
@@ -123,11 +120,12 @@ async function addExpense (event) {
         updateIncome(data);
     })
     .catch(err => console.log(err));
-    window.location.reload();
+    // window.location.reload();
 };
 
 // Update Remaining Income when purchase is made
 async function updateIncome(data) {
+    console.log('in Update')
     const response = await fetch(`api/users/${id}`, {
         method: 'GET', 
         headers: { 'Content-Type': 'application/json'}
@@ -209,7 +207,6 @@ function reloadPage () {
                 headers: { 'Content-Type': 'application/json' }
             });
             const totalExpense = await totalCall.json();
-            
             chartData.push( await totalExpense['products.total_price'])
             labels.push( await tagName);
             colors.push( await tagColor);
@@ -219,10 +216,6 @@ function reloadPage () {
         chart1.update();
         chart2.update();
     })
-    .then((data) => {
-    chart1.update();
-    chart2.update();
-    });
 }
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
@@ -232,9 +225,10 @@ function O(i) {
 return typeof i === "object" ? i : document.getElementById(i);
 }
 function expenseMade() {
-O("add-tag-sound").play();
+    O("add-tag-sound").volume = 0.7;
+    O("add-tag-sound").play();
 }
 function tagAdded() {
-
-O("add-expense-sound").play();
+    O("add-expense-sound").volume = 0.7
+    O("add-expense-sound").play();
 }
