@@ -84,8 +84,6 @@ async function updateLabel (event) {
     if(response.ok) {
         tagAdded();
     }
-    setTimeout(function() {window.location.reload()}, 500)
-
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
@@ -115,7 +113,6 @@ function addExpense (event) {
     .then(data => {
         expenseMade();
         updateIncome(data);
-        setTimeout(function() {window.location.reload()}, 500)
     })
     .catch(err => console.log(err));
     

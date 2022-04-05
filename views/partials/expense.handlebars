@@ -1,12 +1,12 @@
 <ul class="list-group gap-1">
     {{#each Tags as |Tag|}}
     <li class="list-group-item d-flex justify-content-between">
-        <a>{{format_date createdAt}}</a>
-        <a>{{tag_name}}</a>
+        <p>{{format_date createdAt}}</p>
+        <p>{{tag_name}}</p>
         <div class="d-flex justify-content-between">
-            <a>${{product.price}}</a>
+        <p>${{product.price}}</p>
         </div>
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editExpenseModal">
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" id="product-edit-btn"data-bs-target="#editExpenseModal">
             Edit
         </button>
     </li>
