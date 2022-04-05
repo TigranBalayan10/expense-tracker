@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { Product, Tag, User } = require('../../models');
 const { sequelize } = require('../../models/Product');
 
@@ -12,7 +11,7 @@ router.get('/', (req, res) => {
             },
             {
                 model: User,
-                attributes: {exclude: ['password']},
+                attributes: {exclude: ['password']}
             }
         ],
     })
@@ -40,7 +39,6 @@ router.get('/total/:tag_id/:user_id', (req, res) => {
         ]
     })
     .then(dbProductData => {
-        console.log(dbProductData);
         res.json(dbProductData);
     })
     .catch(err => res.json(err))

@@ -2,6 +2,19 @@ const router = require('express').Router();
 const { Product, Tag, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+
+router.get('/loggedin', (req, res) => {
+    console.log(req.session.user_id)
+    User.findOne({
+        where: {
+            id: req.session.user_id
+        },
+        attributes: {exclude: ['password']}
+    })
+    .then(data => {
+        res.json(data)
+    })
+})
 // Get one user
 router.get('/:id', (req, res) => {
     User.findOne({
@@ -29,7 +42,9 @@ router.get('/:id', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
-})
+});
+
+
 // Create User
 router.post('/signup', (req, res) => {
     User.create({
@@ -85,6 +100,7 @@ router.post('/login', (req, res) => {
             res.status(500).json(err);
         });
 })
+
 
 router.post('/logout', withAuth, (req, res) => {
     req.session.destroy(() => {

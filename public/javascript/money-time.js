@@ -1,3 +1,16 @@
+let user_id;
+
+async function grabUserData () {
+    const response = await fetch('/api/users/loggedin', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    const userData = await response.json()
+    const userId = await userData.id;
+    user_id = userId;
+};
+grabUserData();
+
 function daysTilFirst () {
     //Get data from current date 
     const newDate = new Date();
@@ -39,7 +52,7 @@ async function payDayCountdown () {
     let remainingTimeInSeconds = (nextMidnight.getTime() - now.getTime())/1000;
     // if it's within 3 seconds of midnight, run this: 
     if (remainingTimeInSeconds < 3) {
-        let userData = await fetch('/api/users/1', {
+        let userData = await fetch(`/api/users/${user_id}`, {
             method: 'GET', 
             headers: { 'Content-Type': 'application/json'}
         })
@@ -57,7 +70,7 @@ async function payDayCountdown () {
         // These are the two numbers posted in the header. 
         totalExpenses = monthlyBills;
         remainingMoney = monthlyIncome - monthlyBills;
-        let userUpdate = await fetch('/api/users/1', {
+        let userUpdate = await fetch(`/api/users/${user_id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 monthly_income: remainingMoney
