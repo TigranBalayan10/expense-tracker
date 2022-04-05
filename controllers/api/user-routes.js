@@ -4,12 +4,19 @@ const withAuth = require('../../utils/auth');
 
 
 router.get('/loggedin', (req, res) => {
-    console.log(req.session.user_id)
     User.findOne({
         where: {
             id: req.session.user_id
         },
-        attributes: {exclude: ['password']}
+        attributes: {exclude: ['password']},
+        include: [
+            {
+                model: Tag
+            },
+            {
+                model: Product
+            }
+        ]
     })
     .then(data => {
         res.json(data)
