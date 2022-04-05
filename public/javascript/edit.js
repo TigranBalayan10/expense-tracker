@@ -47,4 +47,10 @@ async function editProduct(event) {
   }
 }
 
+// Delete product
+function deleteProduct() {
+  
+}
+
+
 document.querySelector("#edit-expense").addEventListener("click", editProduct);

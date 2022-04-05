@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Product, Tag } = require('../models');
 const path = require('path');
 const withAuth = require('../utils/auth');
+const { log } = require('console');
 
 
 // Route to Sign-In Page
