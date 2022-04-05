@@ -1,8 +1,8 @@
 <div>
   <select class="form-select" id="tag">
     <option selected>Product Tags</option>
-    {{#each this}}
-    <option value="{{tagId}}">{{product_name}}</option>
+    {{#each products}}
+    <option value="{{tagId}}">{{tag.tag_name}}</option>
     {{/each}}
   </select>
 </div>

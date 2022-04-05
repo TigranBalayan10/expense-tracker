@@ -11,6 +11,8 @@ async function grabUserData () {
     id = await userId;
     await updateExpenses();
 };
+
+
 grabUserData();
 
 
@@ -25,49 +27,49 @@ let colors = [];
 let myChart1 = document.getElementById("myPieChart").getContext("2d");
 // Pie Chart Configs
 let chart1 = new Chart(myChart1, {
-  type: "pie",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        data: chartData,
-        backgroundColor: colors,
-        borderWidth: 1,
-        hoverBorderWidth: 2,
-        hoverBorderColor: "#000",
-        borderColor: "#3d3d3d",
-      },
-    ],
-  },
-  options: {
-    animation: {
-      animateScale: true,
+type: "pie",
+data: {
+labels: labels,
+datasets: [
+    {
+    data: chartData,
+    backgroundColor: colors,
+    borderWidth: 1,
+    hoverBorderWidth: 2,
+    hoverBorderColor: "#000",
+    borderColor: "#3d3d3d",
     },
-    title: {
-      display: true,
-    },
-  },
+],
+},
+options: {
+animation: {
+    animateScale: true,
+},
+title: {
+    display: true,
+},
+},
 });
 
 // Bar-chart Config
 let myChart2 = document.getElementById("myBarChart").getContext("2d");
 let chart2 = new Chart(myChart2, {
-  type: "bar",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: "My Expenses",
-        data: chartData,
-        backgroundColor: colors,
-        borderColor: "#3d3d3d",
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    indexAxis: "y",
-  },
+type: "bar",
+data: {
+labels: labels,
+datasets: [
+    {
+    label: "My Expenses",
+    data: chartData,
+    backgroundColor: colors,
+    borderColor: "#3d3d3d",
+    borderWidth: 1,
+    },
+],
+},
+options: {
+indexAxis: "y",
+},
 });
 
 // Update values of labels
@@ -87,6 +89,7 @@ async function updateLabel (event) {
     })
     if(response.ok) {
         tagAdded();
+        window.location.reload();
     }
 }
 document.querySelector("#add-tag").addEventListener("submit", updateLabel);
@@ -119,6 +122,7 @@ async function addExpense (event) {
         updateIncome(data);
     })
     .catch(err => console.log(err));
+    window.location.reload();
 };
 
 // Update Remaining Income when purchase is made
@@ -215,8 +219,8 @@ function reloadPage () {
         chart2.update();
     })
     .then((data) => {
-      chart1.update();
-      chart2.update();
+    chart1.update();
+    chart2.update();
     });
 }
 
@@ -230,5 +234,6 @@ function expenseMade() {
 O("add-tag-sound").play();
 }
 function tagAdded() {
+
 O("add-expense-sound").play();
 }
