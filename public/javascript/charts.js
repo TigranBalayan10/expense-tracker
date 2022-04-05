@@ -84,8 +84,6 @@ async function updateLabel (event) {
     if(response.ok) {
         tagAdded();
     }
-    setTimeout(function() {window.location.reload()}, 500)
-
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
 
@@ -115,7 +113,6 @@ function addExpense (event) {
     .then(data => {
         expenseMade();
         updateIncome(data);
-        setTimeout(function() {window.location.reload()}, 500)
     })
     .catch(err => console.log(err));
     
@@ -231,3 +228,9 @@ function tagAdded() {
     O("add-expense-sound").volume = 0.7
     O("add-expense-sound").play();
 }
+
+
+// Playing with modal closing
+// document.querySelector('#modal-btn-add').addEventListener('click', function() {
+//     document.querySelector('#addExpenseModal').modal('hide');
+// });
