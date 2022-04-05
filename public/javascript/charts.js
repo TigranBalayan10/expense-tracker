@@ -10,6 +10,7 @@ async function grabUserData () {
     const userId = await userData.id;
     id = await userId;
     await updateExpenses();
+    await updateIncome()
 };
 
 
@@ -97,7 +98,7 @@ document.querySelector("#add-tag").addEventListener("submit", updateLabel);
 // Add an expense to a pre-existing tag and reload the page to show changes. 
 async function addExpense (event) {
     event.preventDefault();
-    const tag_id = document.querySelector('#tag').value;
+    const tag_id = document.querySelector('#tag2').value;
     const product_name = document.querySelector('#item').value.trim();
     const price = document.querySelector('#price').value.trim();
     const monthly_bill = document.querySelector('#monthly_bill').checked;
