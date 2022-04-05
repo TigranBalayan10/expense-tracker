@@ -47,9 +47,18 @@ async function editProduct(event) {
   }
 }
 
+function editClick (event){
+  const liElement = event.target.parentNode
+  const Gran = liElement.parentNode
+  console.log(Gran)
+  console.log(aTags)
+}
+document.querySelector('#product-edit-btn').addEventListener('click', editClick)
+
+
 // Delete product
 function deleteProduct() {
-  
+
 }
 
 

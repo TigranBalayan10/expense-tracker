@@ -228,9 +228,3 @@ function tagAdded() {
     O("add-expense-sound").volume = 0.7
     O("add-expense-sound").play();
 }
-
-
-// Playing with modal closing
-// document.querySelector('#modal-btn-add').addEventListener('click', function() {
-//     document.querySelector('#addExpenseModal').modal('hide');
-// });
