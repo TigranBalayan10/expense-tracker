@@ -1,8 +1,8 @@
 <ul class="list-group gap-1">
-    {{#each products as |product|}}
+    {{#each Tags as |Tag|}}
     <li class="list-group-item d-flex justify-content-between">
-        <a>{{format_date product.createdAt}}</a>
-        <a>{{product_name}}</a>
+        <a>{{format_date createdAt}}</a>
+        <a>{{tag_name}}</a>
         <div class="d-flex justify-content-between">
             <a>${{product.price}}</a>
         </div>
