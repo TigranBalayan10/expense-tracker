@@ -215,7 +215,7 @@ function reloadPage () {
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
 
-//////////Sounds//////////////
+//////////Sounds//////////////""
 function O(i) {
     return typeof i === 'object' ? i : document.getElementById(i)
 }
@@ -225,25 +225,3 @@ function expenseMade() {
 function tagAdded() {
     O('add-expense-sound').play();
 }
-
-
-
-// const newUser = new User(grabUserData()) ??????
-// class CurrentUser {
-//     constructor(id) {
-//         this.id = id
-//     }
-//     get RemainingIncome(){
-
-//     }
-//     get TotalExpenses(){
-    
-//     }
-//     addExpense() {
-        // document.querySelector here???
-
-//     }
-//     addTag() {
-
-//     }
-// }
