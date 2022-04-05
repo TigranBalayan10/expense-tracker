@@ -20,7 +20,6 @@ function daysTilFirst () {
     const currentDay = newDate.getDate();
     // Determine amount of days in the month
     const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-    console.log(daysInMonth)
     // Subtract total days in month by current day
     const countdownToFirst = daysInMonth - currentDay; 
     // document.querySelector('#countdown').innerHTML = countdownToFirst;
