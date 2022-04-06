@@ -12,7 +12,6 @@
 
 // tagUserData();
 
-
 // Edit expenses
 async function editProduct(event) {
   event.preventDefault();
@@ -20,10 +19,8 @@ async function editProduct(event) {
   const price = document.querySelector("#edit-price").value.trim();
   const tag_color = document.querySelector("#edit-tag_color").value;
 
-  
   let tagId = document.getElementById("tag").value;
   console.log(tagId);
-
 
   await fetch(`/api/products/1`, {
     method: "PUT",
@@ -47,19 +44,45 @@ async function editProduct(event) {
   }
 }
 
-function editClick (event){
-  const liElement = event.target.
-  const Gran = liElement.parentNode
-  console.log(Gran)
-  console.log(aTags)
+function editClick(event) {
+  // Get the data from the list item
+  const btn = event.target;
+  const productPrice = btn.previousElementSibling.childNodes[1].innerHTML;
+  const tagName = btn.previousElementSibling.previousElementSibling.innerHTML;
+  const date =
+    btn.previousElementSibling.previousElementSibling.previousElementSibling
+      .innerHTML;
+  // Insert these values into the edit table
+  console.log("product price " + productPrice);
+  console.log("tag name " + tagName);
+  console.log("date " + date);
 }
-document.querySelector('#product-edit-btn').addEventListener('click', editClick)
-
+// Add click event listeners to all buttons
+const buttons = document.getElementsByClassName("product-edit-btn");
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", editClick);
+}
 
 // Delete product
-function deleteProduct() {
-
+async function deleteProduct(event) {
+  // Get the prodcut ID
+  const prodcutId = document.getElementById("edit-product").value;
+  console.log(prodcutId);
+  const response = await fetch(`/api/products/${prodcutId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  const deletedData = await response.json();
+  console.log(deletedData);
+  if (response.ok) {
+    window.location.replace("/");
+  }
 }
 
+// Add click event to edit and delete button
+document
+  .querySelector("#delete-product")
+  .addEventListener("click", deleteProduct);
+document.querySelector("#edit-expense").addEventListener("click", editProduct);
 
 document.querySelector("#edit-expense").addEventListener("click", editProduct);
