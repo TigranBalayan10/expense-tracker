@@ -83,6 +83,7 @@ async function updateLabel (event) {
     })
     if(response.ok) {
         tagAdded();
+        reloadPage();
     }
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
