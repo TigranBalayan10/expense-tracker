@@ -81,8 +81,6 @@ async function payDayCountdown () {
     }
 }
 
-// payDayCountdown();
-
 // Set date 
 function currentDate () {
     const now = new Date();
