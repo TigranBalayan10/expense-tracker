@@ -44,7 +44,7 @@ async function editProduct(event) {
   }
 }
 
-function editClick(event) {
+function editClick (event){
   // Get the data from the list item
   const btn = event.target;
   const productPrice = btn.previousElementSibling.childNodes[1].innerHTML;
