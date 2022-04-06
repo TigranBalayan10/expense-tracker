@@ -4,13 +4,12 @@ const { Tag, Product, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-    Product.findAll({
+    Tag.findAll({
         where: {
             user_id: req.session.user_id
         },
         include: [{
-            model: Tag,
-            attributes: ['tag_name']
+            model: Product
         },
         {
             model: User,
@@ -18,10 +17,28 @@ router.get('/', withAuth, (req, res) => {
         }]
     })
         .then(dbProductData => {
-            const product = dbProductData.map(product => product.get({ plain: true }));
-            console.log(product, "This is Product object============")
+            let Products = [];
+            const Tags = dbProductData.map(product => product.get({ plain: true }));
+            console.log(Tags, "This is Tag object============")
+            const allProducts = Tags.map(product => product.products)
+            const nestedProducts = allProducts.map(product => {
+                if (product) {
+                    return product
+                }
+            })
+            console.log(nestedProducts, "This is NestedProducts")
+            
+            for (let i = 0; i < nestedProducts.length; i++){
+                for(let j = 0; j < nestedProducts[i].length; j++){
+                    Products.push(nestedProducts[i][j])
+                }
+            }
+            Products = Products.reverse();
+            Products = Products.slice(0, 5);
+            console.log(Products, "This is Product object============")
             res.render('dashboard', {
-                product,
+                Products,
+                Tags,
                 loggedIn: true,
                 username: req.session.username
             });
@@ -40,11 +57,12 @@ router.put('/edit/:id', withAuth, (req, res) => {
         include: [{
             model: Tag,
             attributes: ['tag_name', 'tag_color']
-        }],
-        include: [{
+        },
+        {
             model: User,
             attributes: ['username']
-        }]
+        }
+        ]
     })
         .then(dbProductData => {
             const product = dbProductData.get({ plain: true });

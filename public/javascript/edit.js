@@ -26,6 +26,7 @@ async function editProduct(event) {
     body: JSON.stringify({
       product_name,
       price,
+      
     }),
     headers: { "Content-Type": "application/json" },
   });
@@ -42,19 +43,27 @@ async function editProduct(event) {
     window.location.reload();
   }
 }
-
+let deleteProductId;
 function editClick (event){
   // Get the data from the list item
   const btn = event.target;
   const productPrice = btn.previousElementSibling.childNodes[1].innerHTML;
-  const tagName = btn.previousElementSibling.previousElementSibling.innerHTML;
-  const date =
-    btn.previousElementSibling.previousElementSibling.previousElementSibling
+  const productName = btn.previousElementSibling.previousElementSibling.children[0].innerHTML;
+  const date = btn.previousElementSibling.previousElementSibling.previousElementSibling
       .innerHTML;
+
+  const product = btn.previousElementSibling.previousElementSibling.previousElementSibling
+  const productId = product.getAttribute("data-set-product-id");
+  // set delete productID
+  deleteProductId = productId;
   // Insert these values into the edit table
   console.log("product price " + productPrice);
-  console.log("tag name " + tagName);
+  console.log("product name " + productName);
   console.log("date " + date);
+  console.log("product ID " + productId)
+
+  document.querySelector("#edit-product").value = productName;
+  document.querySelector("#edit-price").value = productPrice;
 }
 // Add click event listeners to all buttons
 const buttons = document.getElementsByClassName("product-edit-btn");
@@ -65,9 +74,10 @@ for (let i = 0; i < buttons.length; i++) {
 // Delete product
 async function deleteProduct(event) {
   // Get the prodcut ID
-  const productId = document.getElementById('edit-product').value;
+  const product = document.getElementById('edit-product');
+  const productId = product.getAttribute('data-set-product-id');
   console.log(productId);
-  const response = await fetch(`/api/products/${productId}`, {
+  const response = await fetch(`/api/products/${deleteProductId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
@@ -75,27 +85,14 @@ async function deleteProduct(event) {
   console.log(deletedData)
   if(response.ok){
     updateExpenses();
-    // window.location.replace('/');
+    window.location.replace('/');
   }
 }
-
-async function updateExpenseDelete () {
-  // Get user Id
-  const response = await fetch(`/api/users/${id}`, {
-    method: 'GET', 
-    headers: { 'Content-Type': 'application/json'}
-  });
-  const userData = response.json();
-  const currentIncome = userData.monthly_income;
-  console.log(currentIncome)
-
-}
-
 
 // Add click event to edit and delete button
 document
   .querySelector("#delete-product")
   .addEventListener("click", deleteProduct);
-document.querySelector("#edit-expense").addEventListener("click", editProduct);
+
 
 document.querySelector("#edit-expense").addEventListener("click", editProduct);
