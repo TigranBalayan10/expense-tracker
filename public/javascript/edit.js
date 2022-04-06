@@ -48,12 +48,13 @@ async function editProduct(event) {
 }
 
 function editClick (event){
-  const liElement = event.target.
-  const Gran = liElement.parentNode
-  console.log(Gran)
-  console.log(aTags)
+  const btn = event.target
+  const pElement = btn.previousElementSibling.previousElementSibling.previousElementSibling
+  const date = pElement.innerHTML
+  console.log(pElement)
 }
-document.querySelector('#product-edit-btn').addEventListener('click', editClick)
+
+const buttons = document.querySelectorAll('#product-edit-btn').addEventListener('click', editClick)
 
 
 // Delete product
