@@ -5,7 +5,6 @@ const path = require('path');
 const withAuth = require('../utils/auth');
 const { log } = require('console');
 
-
 // Route to Sign-In Page
 router.get('/', (req, res) => {
   // If loggedIn, redirect to dashboard
@@ -18,25 +17,8 @@ router.get('/', (req, res) => {
 
 // Route to registration page
 router.get('/signup', (req, res) => {
-  console.log("pizdec hamar 2");
     res.render('signup');
 });
-
-// Route to the Dashboard
-// router.get('/dashboard', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../public/html/piechart.html'));
-// });
-
-// // get all posts for homepage
-// router.get('/', (req, res) => {
-//   res.send('Hello World')
-
-// });
-
-// // Route to trigger modal for adding expense
-// router.get('/add-expense', (req, res) => {
-//   res.send('This triggers the expense modal');
-// });
 
 // Route to trigger modal for adding Tag
 router.get('/add-tag', (req, res) => {
@@ -60,20 +42,4 @@ router.post('/', (req, res) => {
     });
 });
 
-// login page
-// router.get('/dashboard', withAuth, (req, res) => {
-//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-// });
-
-// router.get('/dashboard', withAuth, (req, res) => {
-//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-// });
-
-// router.get('/dashboard', (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect('/dashboard');
-//     return;
-//   }
-//   res.render('dashboard', { income : `$3400`, expenses: `$1356` });
-// });
 module.exports = router;

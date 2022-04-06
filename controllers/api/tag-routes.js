@@ -52,7 +52,6 @@ router.post('/', (req, res) => {
     Tag.create({
         tag_name: req.body.tag_name,
         tag_color: req.body.tag_color,
-        // Get from session
         user_id: req.session.user_id
 
     })

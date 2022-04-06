@@ -3,7 +3,6 @@ async function loginFormHandler(event) {
 
   const login = document.querySelector("#floatingInput").value.trim();
   const password = document.querySelector("#floatingPassword").value.trim();
-  console.log(login, password);
   if (login && password) {
     // const response = await fetch("/dashboard", {
 
@@ -18,7 +17,7 @@ async function loginFormHandler(event) {
     if (response.ok) {
       document.location.replace("/dashboard");
     } else {
-      alert(response.statusText);
+      console.log(response.statusText);
     }
   }
 }

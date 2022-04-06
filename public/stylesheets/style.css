@@ -1,7 +1,6 @@
 body {
   font-family: "Josefin Sans", sans-serif;
   background-image: url("../media/background.svg");
-  /* background-repeat: no-repeat; */
   background-size: cover;
   height: 100vh;
 }

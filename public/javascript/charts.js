@@ -21,6 +21,7 @@ let labels = [];
 let chartData = [];
 let colors = [];
 let myChart1 = document.getElementById('myPieChart').getContext('2d');
+
 // Pie Chart Configs
 let chart1 = new Chart(myChart1, {
     type: 'pie',
@@ -76,7 +77,6 @@ async function updateLabel (event) {
         body: JSON.stringify({
             tag_name,
             tag_color,
-            // need to assign user id with sessions
             user_id: id
         }),
         headers: {'Content-Type': 'application/json'}
@@ -217,7 +217,7 @@ async function updateExpenses () {
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
 
-// //////////Sounds//////////////""
+// Sounds
 function O(i) {
 return typeof i === "object" ? i : document.getElementById(i);
 }

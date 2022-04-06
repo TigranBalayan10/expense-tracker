@@ -4,7 +4,6 @@ async function signupFormHandler(event) {
     const username = document.querySelector("#floatingInput").value.trim();
     const monthly_income = document.querySelector("#floatingIncome").value.trim();
     const password = document.querySelector("#floatingPassword").value.trim();
-    console.log(username, monthly_income, password);
     if (username && monthly_income && password) {
         const response = await fetch("api/users/signup", {
             method: "post",
@@ -15,11 +14,10 @@ async function signupFormHandler(event) {
             }),
             headers: { "Content-Type": "application/json" },
         });
-        console.log(response);
         if (response.ok) {
             document.location.replace("/dashboard/");
         } else {
-            alert(response.statusText);
+            console.log(response.statusText);
         }
     }
 }

@@ -38,7 +38,6 @@
 * Node.js
 * Express.js
 * MySQL
-* Sequelize
 * Handlebars
 
 ## Installations
@@ -54,8 +53,6 @@
 * sequelize
 
 Development dependencies:
-__________________________
-* eslint
 * nodemon
 
 ## Contribution

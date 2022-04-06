@@ -1,17 +1,3 @@
-// let tagId;
-// async function tagUserData () {
-//     const response = await fetch('/api/users/loggedin', {
-//         method: 'GET',
-//         headers: { 'Content-Type': 'application/json'}
-//     });
-//     const userData = await response.json()
-//     console.log(await userData)
-//     const userId = await userData.id;
-//     id = await userId;
-// };
-
-// tagUserData();
-
 // Edit expenses
 async function editProduct(event) {
   event.preventDefault();
@@ -20,7 +6,6 @@ async function editProduct(event) {
   const tag_color = document.querySelector("#edit-tag_color").value;
 
   let tagId = document.getElementById("tag").value;
-  console.log(tagId);
 
   await fetch(`/api/products/1`, {
     method: "PUT",
@@ -52,11 +37,8 @@ function editClick (event){
   const date =
     btn.previousElementSibling.previousElementSibling.previousElementSibling
       .innerHTML;
-  // Insert these values into the edit table
-  console.log("product price " + productPrice);
-  console.log("tag name " + tagName);
-  console.log("date " + date);
 }
+
 // Add click event listeners to all buttons
 const buttons = document.getElementsByClassName("product-edit-btn");
 for (let i = 0; i < buttons.length; i++) {
@@ -67,13 +49,11 @@ for (let i = 0; i < buttons.length; i++) {
 async function deleteProduct(event) {
   // Get the product ID
   const productId = document.getElementById("edit-product").value;
-  console.log(productId);
   const response = await fetch(`/api/products/${productId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
   const deletedData = await response.json();
-  console.log(deletedData);
   if (response.ok) {
     window.location.replace("/");
   }
