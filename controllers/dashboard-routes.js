@@ -4,12 +4,13 @@ const { Tag, Product, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-    Tag.findAll({
+    Product.findAll({
         where: {
             user_id: req.session.user_id
         },
         include: [{
-            model: Product,
+            model: Tag,
+            attributes: ['tag_name']
         },
         {
             model: User,
@@ -17,10 +18,10 @@ router.get('/', withAuth, (req, res) => {
         }]
     })
         .then(dbProductData => {
-            const Tags = dbProductData.map(tag => tag.get({ plain: true }));
-            console.log(Tags, "This is Product object============")
+            const product = dbProductData.map(product => product.get({ plain: true }));
+            console.log(product, "This is Product object============")
             res.render('dashboard', {
-                Tags,
+                product,
                 loggedIn: true,
                 username: req.session.username
             });

@@ -91,6 +91,6 @@ function currentDate () {
     const year = now.getFullYear();
 
     const todayDate = `${month}/${date}/${year}`;
-    document.querySelector('#todays-date').innerHTML = todayDate;
+    document.querySelector('#todays-date').innerHTML = `Today's Date: ${todayDate}`;
 }
 currentDate();

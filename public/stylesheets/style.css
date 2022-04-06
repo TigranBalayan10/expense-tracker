@@ -1,7 +1,7 @@
 body {
   font-family: "Josefin Sans", sans-serif;
   background-image: url("../media/background.svg");
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: cover;
   height: 100vh;
 }
@@ -46,4 +46,15 @@ body {
 #myBarChart {
   margin: 0 auto;
   width: 100%;
+}
+
+.tag-text {
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+#product-edit-btn {
+  width: 60px;
+  height: 45px;
 }
