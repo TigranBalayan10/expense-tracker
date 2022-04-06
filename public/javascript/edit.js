@@ -48,13 +48,24 @@ async function editProduct(event) {
 }
 
 function editClick (event){
-  const btn = event.target
-  const pElement = btn.previousElementSibling.previousElementSibling.previousElementSibling
-  const date = pElement.innerHTML
-  console.log(pElement)
+  const btn = event.target;
+  const productPrice = btn.previousElementSibling.childNodes[1].innerHTML;
+  const tagName = btn.previousElementSibling.previousElementSibling.innerHTML;
+  const date = btn.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+  
+  console.log('product price ' + productPrice);
+  console.log('tag name ' + tagName);
+  console.log('date ' + date);
+
 }
 
-const buttons = document.querySelectorAll('#product-edit-btn').addEventListener('click', editClick)
+const buttons = document.getElementsByClassName('product-edit-btn');
+console.log(buttons)
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', editClick)
+}
+
 
 
 // Delete product
