@@ -114,6 +114,7 @@ function addExpense (event) {
     .then(data => {
         expenseMade();
         updateIncome(data);
+        setTimeout(function(){window.location.reload()}, 700)
     })
     .catch(err => console.log(err));
     
