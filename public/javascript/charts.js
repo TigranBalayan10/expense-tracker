@@ -83,7 +83,7 @@ async function updateLabel (event) {
     })
     if(response.ok) {
         tagAdded();
-        reloadPage();
+        setTimeout(function(){location.reload()}, 500)
     }
 }
 document.querySelector('#add-tag').addEventListener('submit', updateLabel);
@@ -212,7 +212,6 @@ async function updateExpenses () {
     const monthlyIncome = userData.monthly_income;
     document.querySelector('#remaining_income').innerHTML = monthlyIncome
     reloadPage();
-    
 }
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
@@ -225,7 +224,7 @@ function expenseMade() {
     O("add-tag-sound").volume = 0.7;
     O("add-tag-sound").play();
 }
-function tagAdded() {
+async function tagAdded() {
     O("add-expense-sound").volume = 0.7
     O("add-expense-sound").play();
 }

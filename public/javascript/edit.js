@@ -1,3 +1,16 @@
+let tagId;
+async function tagUserData () {
+    const response = await fetch('/api/users/loggedin', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json'}
+    });
+    const userData = await response.json()
+    console.log(await userData)
+    const userId = await userData.id;
+    id = await userId;
+};
+tagUserData();
+
 // Edit expenses
 async function editProduct(event) {
   event.preventDefault();
@@ -47,17 +60,33 @@ for (let i = 0; i < buttons.length; i++) {
 
 // Delete product
 async function deleteProduct(event) {
-  // Get the product ID
-  const productId = document.getElementById("edit-product").value;
+  // Get the prodcut ID
+  const productId = document.getElementById('edit-product').value;
+  console.log(productId);
   const response = await fetch(`/api/products/${productId}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
   });
   const deletedData = await response.json();
-  if (response.ok) {
-    window.location.replace("/");
+  console.log(deletedData)
+  if(response.ok){
+    updateExpenses();
+    window.location.replace('/');
   }
 }
+
+async function updateExpenseDelete () {
+  // Get user Id
+  const response = await fetch(`/api/users/${id}`, {
+    method: 'GET', 
+    headers: { 'Content-Type': 'application/json'}
+  });
+  const userData = response.json();
+  const currentIncome = userData.monthly_income;
+  console.log(currentIncome)
+
+}
+
 
 // Add click event to edit and delete button
 document
