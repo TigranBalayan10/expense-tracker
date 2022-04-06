@@ -48,7 +48,7 @@ async function editProduct(event) {
 }
 
 function editClick (event){
-  const liElement = event.target.parentNode
+  const liElement = event.target.
   const Gran = liElement.parentNode
   console.log(Gran)
   console.log(aTags)
