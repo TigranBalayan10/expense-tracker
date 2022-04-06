@@ -1,7 +1,6 @@
 <div>
   <select class="form-select" id="tag">
     <option disabled>Product Tags</option>
-    <option value="test">Test</option>
     {{#each product}}
     <option value="{{tag_id}}">{{tag.tag_name}}</option>
     {{/each}}

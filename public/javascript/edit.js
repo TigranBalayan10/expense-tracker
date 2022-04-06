@@ -65,10 +65,10 @@ for (let i = 0; i < buttons.length; i++) {
 
 // Delete product
 async function deleteProduct(event) {
-  // Get the prodcut ID
-  const prodcutId = document.getElementById("edit-product").value;
-  console.log(prodcutId);
-  const response = await fetch(`/api/products/${prodcutId}`, {
+  // Get the product ID
+  const productId = document.getElementById("edit-product").value;
+  console.log(productId);
+  const response = await fetch(`/api/products/${productId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
