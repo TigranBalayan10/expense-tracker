@@ -113,11 +113,10 @@ function addExpense (event) {
     .then(res => res.json())
     .then(data => {
         expenseMade();
-        updateIncome(data);
+        updateExpenses();
         setTimeout(function(){window.location.reload()}, 700)
     })
-    .catch(err => console.log(err));
-    
+    .catch(err => console.log(err));   
 }
 
 // Reloads page with current data from the Database.
@@ -155,30 +154,66 @@ function reloadPage () {
 }
 
 // Update Remaining Income when purchase is made
-async function updateIncome(data) {
-    const response = await fetch(`/api/users/${id}`, {
-        method: 'GET', 
-        headers: { 'Content-Type': 'application/json'}
-    })
-    const userData = await response.json();
-    // get price from expense
-    const price = data.price;
-    const currentIncome = userData.monthly_income
-    const remainingMoney = currentIncome - price;
-    let userUpdate = await fetch(`/api/users/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            monthly_income: remainingMoney
-        }),
-        headers: { 'Content-Type': 'application/json'}
-    });
-    userUpdate = await userUpdate.json();
-    // Attach the  Current Income here. 
-    document.querySelector('#remaining_income').innerHTML = currentIncome;
-    updateExpenses();
-}
+// async function updateIncome(data) {
+//     const response = await fetch(`/api/users/${id}`, {
+//         method: 'GET', 
+//         headers: { 'Content-Type': 'application/json'}
+//     })
+//     const userData = await response.json();
+//     // get price from expense
+//     const price = data.price;
+//     const currentIncome = userData.monthly_income
+//     const remainingMoney = currentIncome - price;
+//     let userUpdate = await fetch(`/api/users/${id}`, {
+//         method: 'PUT',
+//         body: JSON.stringify({
+//             monthly_income: remainingMoney
+//         }),
+//         headers: { 'Content-Type': 'application/json'}
+//     });
+//     userUpdate = await userUpdate.json();
+//     // Attach the  Current Income here. 
+//     document.querySelector('#remaining_income').innerHTML = currentIncome;
+//     updateExpenses();
+// }
 
-// Update total expenses when a purchase is made
+// // Update total expenses when a purchase is made
+// async function updateExpenses () {
+//     // Empty array for all the products in same month
+//     let monthlyProducts = [];
+//     // Empty number where prices will be added to
+//     let monthlyTotal = 0;
+//     // Get all expenses prices of the current month. 
+//     const response = await fetch(`/api/products/monthly/${id}`, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json'}
+//     });
+//     const allProducts = await response.json();
+//     allProducts.forEach( product => {
+//         const date = new Date(product.createdAt);
+//         const createdMonth = date.getMonth() + 1;
+//         const today = new Date();
+//         const currentMonth = today.getMonth() + 1;
+//         if (createdMonth === currentMonth) {
+//             monthlyProducts.push(product);
+//         }
+//     });
+//     monthlyProducts.forEach(product => {
+//         const price = parseInt(product.price)
+//         monthlyTotal += price;
+//     });
+//     // This is where we get the total Expenses
+//     document.querySelector('#total_expenses').innerHTML = monthlyTotal;
+//     const response2 = await fetch(`/api/users/${id}`, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json'}
+//     });
+//     userData = await response2.json();
+//     const monthlyIncome = userData.monthly_income;
+//     document.querySelector('#remaining_income').innerHTML = monthlyIncome
+//     reloadPage();
+// }
+
 async function updateExpenses () {
     // Empty array for all the products in same month
     let monthlyProducts = [];
@@ -210,10 +245,11 @@ async function updateExpenses () {
         headers: { 'Content-Type': 'application/json'}
     });
     userData = await response2.json();
-    const monthlyIncome = userData.monthly_income;
+    const monthlyIncome = await userData.monthly_income - monthlyTotal;
     document.querySelector('#remaining_income').innerHTML = monthlyIncome
     reloadPage();
 }
+
 
 document.querySelector('#add-expense').addEventListener('submit', addExpense);
 

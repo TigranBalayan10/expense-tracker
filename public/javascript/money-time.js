@@ -76,7 +76,9 @@ async function payDayCountdown () {
             }),
             headers: { 'Content-Type': 'application/json'}
         });
-        userUpdate = await userUpdate.json(); 
+        if (userUpdate.ok) {
+            userUpdate = await userUpdate.json(); 
+        }
         // make a function that gets the remaining amount of money before reset, saves it, and line-graphs it. 
     }
 }
