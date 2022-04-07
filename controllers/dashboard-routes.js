@@ -19,15 +19,12 @@ router.get('/', withAuth, (req, res) => {
         .then(dbProductData => {
             let Products = [];
             const Tags = dbProductData.map(product => product.get({ plain: true }));
-            console.log(Tags, "This is Tag object============")
             const allProducts = Tags.map(product => product.products)
             const nestedProducts = allProducts.map(product => {
                 if (product) {
                     return product
                 }
             })
-            console.log(nestedProducts, "This is NestedProducts")
-            
             for (let i = 0; i < nestedProducts.length; i++){
                 for(let j = 0; j < nestedProducts[i].length; j++){
                     Products.push(nestedProducts[i][j])
@@ -35,7 +32,6 @@ router.get('/', withAuth, (req, res) => {
             }
             Products = Products.reverse();
             Products = Products.slice(0, 5);
-            console.log(Products, "This is Product object============")
             res.render('dashboard', {
                 Products,
                 Tags,

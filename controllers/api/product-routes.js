@@ -7,13 +7,15 @@ router.get('/', (req, res) => {
     Product.findAll({
         include: [
             {
-                model: Tag
+                model: Tag,
+                attributes: {exclude: ['updateAt']}
             },
             {
                 model: User,
                 attributes: {exclude: ['password']}
             }
         ],
+        attributes: {exclude: ['updateAt']}
     })
         .then(dbProductData => {
             const products = dbProductData.map(product => product.get({ plain: true }));
