@@ -24,7 +24,9 @@
             <div class="fs-5 text-center" align>
                 <h4 id="todays-date"></h4>
                 <span id="countdown" class="text-danger"></span> until the first.
-                <progress id="countdown-progress" max="100" class="d-block"></progress>
+                <div class="d-block align-content-end">
+                    <progress id="countdown-progress" max="100"></progress>
+                </div>
             </div>
             <div class="fs-5 text-light">Welcome {{username}}</div>
         </div>
@@ -44,9 +46,7 @@
                                 data-bs-target="#addTagModal">
                                 + Add Tag
                             </button>
-                            <div class="badge bg-primary fs-6" style="width: 10rem">
-                                {{username}}'s Expenses
-                            </div>
+                            <span class="float-end fs-5">{{username}}'s Expenses</span>
                         </div>
                         <div class="d-grid gap-3">
                             {{> expense }}
