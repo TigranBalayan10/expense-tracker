@@ -49,15 +49,6 @@
                                 {{username}}'s Expenses
                             </div>
                         </div>
-                        {{!-- <div class="container">
-                            <h3>Today's Date:</h3>
-                            <h4 id="todays-date"></h4>
-                        </div>
-                        <div class="container">
-                            <div class="badge bg-secondary text-wrap fs-5" style="width: 30rem"></div>
-                            <h4><span id="countdown" class="text-danger"></span> until the first.</h4>
-                            <progress id="countdown-progress" max="100"></progress>
-                        </div> --}}
                         <div class="d-grid gap-3">
                             {{> expense }}
                         </div>
@@ -69,7 +60,7 @@
                     <div class="card-body text-center sizing">
                         <h5 class="card-title fs-3">Interactive Graph</h5>
 
-                        <div class="container w-80 carousel slide" id="myCarousel" data-ride="carousel">
+                        <div class="container w-80 carousel slide" id="myCarousel" data-interval="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <canvas id="myPieChart" class="d-block w-100"></canvas>
