@@ -1,15 +1,15 @@
 <ul class="list-group gap-1">
-    {{#each product}}
+    {{#each Products as |product|}}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <p>{{format_date createdAt}}</p>
+        <p data-set-product-id="{{id}}">{{format_date createdAt}}</p>
         <div class="text-center">
             <p>{{product_name}}</p>
-            <p class="tag-text text-success">{{tag.tag_name}}</p>
+            {{!-- <p class="tag-text text-success">{{tag_name}}</p> --}}
         </div>
         <div class="d-flex justify-content-between">
             <p>${{price}}</p>
         </div>
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" id="product-edit-btn"
+        <button type="button" class="btn btn-outline-success product-edit-btn" data-bs-toggle="modal"
             data-bs-target="#editExpenseModal">
             Edit
         </button>
