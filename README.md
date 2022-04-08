@@ -57,3 +57,8 @@ Development dependencies:
 
 ## Contribution
 Made with ❤ by Anthony Barragan [@Abarragan89](https://github.com/Abarragan89), Tigran Balayan [@TigranBalayan10](https://github.com/TigranBalayan10), and Shahen Tokhalyan [@Tokhalyan](https://github.com/Tokhalyan)
+
+
+## Screenshots
+![Screenshot](./assets/images/homepage.png)
+![Screenshot](./assets/images/homepage.png)
