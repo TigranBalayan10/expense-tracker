@@ -100,12 +100,10 @@ for (let i = 0; i < buttons.length; i++) {
 async function deleteProduct(event) {
   // Get the prodcut ID
   const product = document.getElementById('edit-product');
-  const productId = product.getAttribute('data-set-product-id');
   const response = await fetch(`/api/products/${deleteProductId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   });
-  const deletedData = await response.json();
   if(response.ok){
     updateExpenses();
     window.location.replace('/');
