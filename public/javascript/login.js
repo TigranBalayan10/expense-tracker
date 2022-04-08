@@ -3,8 +3,10 @@ async function loginFormHandler(event) {
 
   const login = document.querySelector("#floatingInput").value.trim();
   const password = document.querySelector("#floatingPassword").value.trim();
+  const userEl = document.querySelector("#user-el");
+  const loginEl = document.querySelector("#floatingInput")
   if (login && password) {
-    // const response = await fetch("/dashboard", {
+
 
     const response = await fetch("/api/users/login", {
       method: "post",
@@ -17,7 +19,14 @@ async function loginFormHandler(event) {
     if (response.ok) {
       document.location.replace("/dashboard");
     } else {
-      console.log(response.statusText);
+      loginEl.setAttribute("class", "form-control is-invalid");
+      loginEl.setAttribute("aria-describedby", "validationServer04Feedback");
+      loginEl.setAttribute("required", "true");
+      const invalidUserPass = document.createElement('div');
+      invalidUserPass.setAttribute("id", "validationServer04Feedback");
+      invalidUserPass.setAttribute("class", "invalid-feedback");
+      invalidUserPass.innerHTML = "Invalid Username or Password!";
+      userEl.appendChild(invalidUserPass);
     }
   }
 }
