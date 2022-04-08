@@ -61,4 +61,4 @@ Made with ❤ by Anthony Barragan [@Abarragan89](https://github.com/Abarragan89)
 
 ## Screenshots
 ![Screenshot](./assets/images/homepage.png)
-![Screenshot](./assets/images/homepage.png)
+![Screenshot](./assets/images/dashboard.png)
