@@ -23,16 +23,29 @@ async function signupFormHandler(event) {
     }
   } else {
     passwordValidation.setAttribute("class", "form-control is-invalid");
-    passwordValidation.setAttribute("aria-describedby", "validationServer03Feedback");
+    passwordValidation.setAttribute(
+      "aria-describedby",
+      "validationServer03Feedback"
+    );
     passwordValidation.setAttribute("required", "true");
-    const invalidPasswordEl = document.createElement('div');
+    const invalidPasswordEl = document.createElement("div");
     invalidPasswordEl.setAttribute("id", "validationServer03Feedback");
     invalidPasswordEl.setAttribute("class", "invalid-feedback");
-    invalidPasswordEl.innerHTML = "Password must be at least 4 characters long";    
+    invalidPasswordEl.innerHTML = "Password must be at least 4 characters long";
     passwordEl.appendChild(invalidPasswordEl);
   }
+}
+
+async function removeInvalidText (event) {
+  event.preventDefault();
+  document.getElementById("validationServer03Feedback").remove();
+  document.querySelector("#floatingPassword").setAttribute("class", "form-control");
 }
 
 document
   .querySelector("#signup-form")
   .addEventListener("click", signupFormHandler);
+
+document
+  .getElementById("floatingPassword")
+  .addEventListener("focus", removeInvalidText, true);
